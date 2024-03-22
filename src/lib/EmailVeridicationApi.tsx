@@ -3,6 +3,7 @@ import { backendurl } from './Backendpoint';
 export async function VerifyEmailWithToken(JWTToken: string, token_id: string) {
   try {
     const response = await fetch(`${backendurl}api/confirm`, {
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,6 +27,7 @@ export async function VerifyEmailWithToken(JWTToken: string, token_id: string) {
 export async function SendVerificationEmail(Token: string) {
   try {
     const response = await fetch(`${backendurl}api/sendverifyemail`, {
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

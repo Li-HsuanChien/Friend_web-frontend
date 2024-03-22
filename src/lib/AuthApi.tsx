@@ -4,6 +4,7 @@ export async function LoginApi(email_username: string, password: string) {
   try {
     const response = await fetch(`${backendurl}api/login`, {
       method: 'POST',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -32,6 +33,7 @@ export async function RegisterApi(email: string,
 
   return fetch(`${backendurl}api/register`, {
     method: 'POST',
+    mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -48,6 +50,7 @@ export async function PingServer(Token: string): Promise<void> {
   try {
     const response = await fetch(`${backendurl}api/currentuser`, {
       method: 'GET',
+      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${Token}`

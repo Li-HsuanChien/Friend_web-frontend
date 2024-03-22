@@ -4,6 +4,7 @@ export async function getActivatedConnection(user_id: string, Token: string): Pr
   try {
     const response = await fetch(`${backendurl}api/connections/activated`, {
       credentials: 'include',
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,6 +27,7 @@ export async function getPendingConnection(user_id: string, Token: string): Prom
   try {
     const response = await fetch(`${backendurl}api/connections/pending`, {
       credentials: 'include',
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -46,6 +48,7 @@ export async function getPendingConnection(user_id: string, Token: string): Prom
 export async function ConnectionCreate(Token: string, invitee_id: string): Promise<ConnectionData> {
   try {
     const response = await fetch(`${backendurl}api/connections/add`, {
+      mode: 'no-cors',
       credentials: 'include',
       method: 'POST',
       headers: {
@@ -68,6 +71,7 @@ export async function ConnectionCreate(Token: string, invitee_id: string): Promi
 export async function ConnectionGet(connection_id: string, Token: string): Promise<ConnectionData> {
   try {
     const response = await fetch(`${backendurl}api/connections/self`, {
+      mode: 'no-cors',
       credentials: 'include',
       method: 'PUT',
       headers: {
@@ -90,6 +94,7 @@ export async function ConnectionGet(connection_id: string, Token: string): Promi
 export async function ConnectionDelete(connection_id: string, Token: string): Promise<Message> {
   try {
     const response = await fetch(`${backendurl}api/connections/self`, {
+      mode: 'no-cors',
       credentials: 'include',
       method: 'DELETE',
       headers: {
@@ -123,6 +128,7 @@ export async function ConnectionUpdate(connection_id: string,
     if(closeness) body.closeness = closeness;
     if(nickname) body.nickname = nickname;
     const response = await fetch(`${backendurl}connections/self `, {
+      mode: 'no-cors',
       credentials: 'include',
       method: 'PUT',
       headers: {

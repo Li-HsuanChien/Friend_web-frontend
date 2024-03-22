@@ -3,6 +3,7 @@ import { backendurl } from './Backendpoint';
 export async function SendResetLink(email: string) {
   try {
     const response = await fetch(`${backendurl}api/forgotpassword`, {
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -22,6 +23,7 @@ export async function SendResetLink(email: string) {
 export async function SendResetPassword(password_token: string, password: string, password2: string) {
   try {
     const response = await fetch(`${backendurl}api/resetpassword`, {
+      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
