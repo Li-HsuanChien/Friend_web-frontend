@@ -40,7 +40,7 @@
     "pretest": "npm.cmd run compile",
     "posttest": "npm.cmd run lint",
     "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d public" 
+    "deploy" : "gh-pages -d" 
   },
   "eslintConfig": {
     "extends": [
