@@ -38,7 +38,9 @@
     "fix": "gts fix",
     "prepare": "npm.cmd run compile",
     "pretest": "npm.cmd run compile",
-    "posttest": "npm.cmd run lint"
+    "posttest": "npm.cmd run lint",
+    "predeploy" : "npm run build",
+    "deploy" : "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
@@ -62,6 +64,7 @@
     "@babel/plugin-transform-runtime": "^7.23.9",
     "@types/node": "20.8.2",
     "eslint": "^8.56.0",
+    "gh-pages": "^6.1.1",
     "gts": "^5.2.0",
     "react-router-dom": "^6.22.0"
   }
