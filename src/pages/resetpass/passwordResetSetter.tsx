@@ -34,13 +34,13 @@ const LoginStyle = styled.div`
 
   .shape:first-child {
     background: linear-gradient(#dfe1e4, #b7b7b8);
-    left: -80px;
+    left: -100px;
     top: -80px;
   }
 
   .shape:last-child {
     background: linear-gradient(to right, #dfe1e4, #b7b7b8);
-    right: -30px;
+    right: -100px;
     bottom: -80px;
   }
 
@@ -83,7 +83,7 @@ const LoginStyle = styled.div`
 
   label {
     display: block;
-    margin-top: 30px;
+    margin-top: 20px;
     font-size: 16px;
     font-weight: 500;
   }
@@ -94,23 +94,26 @@ const LoginStyle = styled.div`
     width: 100%;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
-    padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
   }
-
-  // input:-webkit-autofill { 
-  //   -webkit-box-shadow:200px 200px 100px black inset; 
-  //   box-shadow:200px 200px 100px white inset; 
-  // }
 
   ::placeholder {
     color: #e5e5e5;
   }
 
   button {
-    margin-top: 50px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px; 
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+      background-color: black;
+      color:white;
+    }
     width: 100%;
     background-color: #ffffff;
     color: #080710;
@@ -119,7 +122,9 @@ const LoginStyle = styled.div`
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 30px;
   }
+
   main {
     height: 400px;
     width: 400px;
@@ -133,28 +138,6 @@ const LoginStyle = styled.div`
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
     padding: 50px 35px;
-  }
-
-  main * {
-    font-family: 'Poppins', sans-serif;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-    outline: none;
-    border: none;
-  }
-
-  main h3 {
-    font-size: 32px;
-    font-weight: 500;
-    line-height: 42px;
-    text-align: center;
-  }
-
-  main p {
-    text-align: center;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    font-size: 13px;
   }
 `
 

@@ -31,13 +31,13 @@ const ReportStyle = styled.div`
 
   .shape:first-child {
     background: linear-gradient(#dfe1e4, #b7b7b8);
-    left: -80px;
+    left: -100px;
     top: -80px;
   }
 
   .shape:last-child {
     background: linear-gradient(to right, #dfe1e4, #b7b7b8);
-    right: -30px;
+    right: -100px;
     bottom: -80px;
   }
 
@@ -73,13 +73,22 @@ const ReportStyle = styled.div`
 
   main p {
     text-align: center;
-    margin-top: 15px;
+    margin-top: 40px;
     margin-bottom: 10px;
     font-size: 13px;
   }
 
   button {
-    margin-top: 50px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px; 
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+      background-color: black;
+      color:white;
+    }
     width: 100%;
     background-color: #ffffff;
     color: #080710;
@@ -88,6 +97,7 @@ const ReportStyle = styled.div`
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 60px;
   }
 `
 

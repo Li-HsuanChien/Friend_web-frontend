@@ -7,7 +7,7 @@ import Add from './pages/data/Add';
 import reportWebVitals from './reportWebVitals';
 import { AppProvider } from './AppContext';
 // eslint-disable-next-line node/no-unpublished-import
-import {BrowserRouter, Routes, Route, HashRouter} from 'react-router-dom';
+import {BrowserRouter, Routes, Route} from 'react-router-dom';
 import PrivateRoutes  from './auth/privateroutes';
 import VerifiedRoutes from './auth/verifiedroutes';
 import DataRoutes from './auth/hasdataroutes';
@@ -22,7 +22,7 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <AppProvider>
-    <HashRouter>
+    <BrowserRouter>
       <Routes>
         <Route element={<PrivateRoutes/>}>
           <Route element={<VerifiedRoutes/>}>
@@ -39,7 +39,7 @@ root.render(
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
       </Routes>
-    </HashRouter>
+    </BrowserRouter>
   </AppProvider>
 );
 

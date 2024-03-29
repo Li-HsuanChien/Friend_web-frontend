@@ -97,7 +97,6 @@ const RegisterStyle = styled.div`
     width: 100%;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
-    padding: 0 10px;
     margin-top: 8px;
     font-size: 14px;
     font-weight: 300;
@@ -108,7 +107,16 @@ const RegisterStyle = styled.div`
   }
 
   button {
-    margin-top: 5px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px; 
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+      background-color: black;
+      color:white;
+    }
     width: 100%;
     background-color: #ffffff;
     color: #080710;

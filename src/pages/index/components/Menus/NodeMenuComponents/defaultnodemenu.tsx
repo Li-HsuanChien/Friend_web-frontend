@@ -7,9 +7,24 @@ import { FaSnapchat } from 'react-icons/fa6';
 import { Url } from 'url';
 import { genderLookup } from '../../../../../lib/lookupfunction';
 import { Gender } from '../../../../../lib/Types';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { closeMenu } from '../../../../../actions';
+import styled from 'styled-components';
+import { backendurl } from '../../../../../lib/Backendpoint';
+
+const Close = styled(IoIosCloseCircleOutline)`
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.2); 
+  }
+  position: absolute;
+  top: 3%;
+  right: 5%;
+`;
 
 const DefaultNodeMenu: React.FC = () =>{
-
+  const { dispatch } = useContext(AppContext)
   const { clickeduser } = useContext(AppContext);
 
   return(
@@ -18,11 +33,12 @@ const DefaultNodeMenu: React.FC = () =>{
           <img
               width="90%"
               height="90%"
-              src={`http://127.0.0.1:8000/${clickeduser?.headshot as Url}`}
-              alt="Headshot"
+              src={`${backendurl}${clickeduser?.headshot as Url}`}
+              alt="Headshot
+              "
               />
           <span>Bio:</span>
-          <div><p>{clickeduser?.bio}</p></div>
+          <div>{clickeduser?.bio}</div>
           <span>Gender: </span>
           <p>{genderLookup(clickeduser?.gender as Gender)}</p>
           <span>Birthday: </span>
@@ -33,6 +49,7 @@ const DefaultNodeMenu: React.FC = () =>{
           <a href= {clickeduser?.facebook_link as string} style={{color:'blue'}}><FaFacebookSquare /></a>
           <a href= {clickeduser?.snapchat_link as string} style={{color:'yellow'}}><FaSnapchat /></a>
           <p>{clickeduser?.created_time}</p>
+          <Close onClick={()=>dispatch(closeMenu())} />
     </>
   )
 }

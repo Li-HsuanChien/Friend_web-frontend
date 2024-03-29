@@ -1,8 +1,7 @@
 /* eslint-disable node/no-unpublished-import */
-import React, { useState } from 'react';
+import React from 'react';
 import { styled } from 'styled-components';
-import {useNavigate, Link, } from 'react-router-dom';
-import {ChangeEvent} from 'react';
+import {useNavigate } from 'react-router-dom';
 
 const ReportStyle = styled.div`
 
@@ -31,17 +30,17 @@ const ReportStyle = styled.div`
 
   .shape:first-child {
     background: linear-gradient(#dfe1e4, #b7b7b8);
-    left: -80px;
+    left: -100px;
     top: -80px;
   }
 
   .shape:last-child {
     background: linear-gradient(to right, #dfe1e4, #b7b7b8);
-    right: -30px;
+    right: -100px;
     bottom: -80px;
   }
 
-  div {
+  main {
     height: 400px;
     width: 400px;
     background-color: rgba(255, 255, 255, 0.13);
@@ -56,7 +55,7 @@ const ReportStyle = styled.div`
     padding: 50px 35px;
   }
 
-  div * {
+  main * {
     font-family: 'Poppins', sans-serif;
     color: #ffffff;
     letter-spacing: 0.5px;
@@ -64,14 +63,14 @@ const ReportStyle = styled.div`
     border: none;
   }
 
-  div h3 {
+  main h3 {
     font-size: 32px;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
   }
 
-  div p {
+  main p {
     text-align: center;
     margin-top: 15px;
     margin-bottom: 10px;
@@ -79,7 +78,16 @@ const ReportStyle = styled.div`
   }
 
   button {
-    margin-top: 50px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px; 
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+      background-color: black;
+      color:white;
+    }
     width: 100%;
     background-color: #ffffff;
     color: #080710;
@@ -102,11 +110,11 @@ const EmailConfirmFail = () => {
           <div className="shape"></div>
         </div>
 
-        <div>
+        <main>
           <h3>Failed!</h3>
           <h3>Click button to send another mail to your account!</h3>
           <button onClick={() => nav('/login')}>Back to Login</button>
-        </div>
+        </main>
       </ReportStyle>
     </>
   );

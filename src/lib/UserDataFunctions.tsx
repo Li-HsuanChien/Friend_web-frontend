@@ -6,7 +6,6 @@ import { backendurl } from './Backendpoint';
 export async function getUserData(user_id: string, Token: string): Promise<SuccessUserData> {
   try {
     const response = await fetch(`${backendurl}api/userdata`, {
-      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -39,7 +38,6 @@ export async function UserCreate(gender: string, date_of_birth: string, show_hor
     formData.append('date_of_birth', date_of_birth);
     if(image)formData.append('headshot', image);
     const response = await fetch(`${backendurl}api/userdatas/add`, {
-      mode: 'no-cors',
       method: 'POST',
       headers: {
         // No need for Content-Type here, as it will be automatically set
@@ -83,7 +81,6 @@ export async function UserUpdate(Token: string,
     if(snapchat_link) formData.append('snapchat_link', snapchat_link);
 
     const response = await fetch(`${backendurl}api/userdatas/update`, {
-      mode: 'no-cors',
       method: 'PUT',
       headers: {
         'Authorization': `Bearer ${Token}`

@@ -4,7 +4,6 @@ export async function LoginApi(email_username: string, password: string) {
   try {
     const response = await fetch(`${backendurl}api/login`, {
       method: 'POST',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -33,7 +32,6 @@ export async function RegisterApi(email: string,
 
   return fetch(`${backendurl}api/register`, {
     method: 'POST',
-    mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -50,7 +48,6 @@ export async function PingServer(Token: string): Promise<void> {
   try {
     const response = await fetch(`${backendurl}api/currentuser`, {
       method: 'GET',
-      mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${Token}`
@@ -67,3 +64,22 @@ export async function PingServer(Token: string): Promise<void> {
 }
 
 
+export async function logout(Token: string, refresh_token: string){
+  try {
+    const response = await fetch(`${backendurl}api/logout`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${Token}`
+      },
+      body: JSON.stringify({ refresh_token: refresh_token }),
+    });
+    if (!response.ok) {
+      throw new Error('Failed to log out');
+    }
+    return;
+  } catch (error) {
+    console.error('Failed to log out:', error);
+    throw error;
+  }
+}

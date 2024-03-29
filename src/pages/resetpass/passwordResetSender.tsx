@@ -109,7 +109,16 @@ const LoginStyle = styled.div`
   }
 
   button {
-    margin-top: 100px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px; 
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+      background-color: black;
+      color:white;
+    }
     width: 100%;
     background-color: #ffffff;
     color: #080710;
@@ -118,7 +127,7 @@ const LoginStyle = styled.div`
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
-    bottom: 10px;
+    margin-top: 100px;
   }
   main {
     height: 400px;

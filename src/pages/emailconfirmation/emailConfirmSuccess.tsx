@@ -37,7 +37,7 @@ const ReportStyle = styled.div`
 
   .shape:last-child {
     background: linear-gradient(to right, #dfe1e4, #b7b7b8);
-    right: -30px;
+    right: -80px;
     bottom: -80px;
   }
 
@@ -79,7 +79,16 @@ const ReportStyle = styled.div`
   }
 
   button {
-    margin-top: 50px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px; 
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+      background-color: black;
+      color:white;
+    }
     width: 100%;
     background-color: #ffffff;
     color: #080710;

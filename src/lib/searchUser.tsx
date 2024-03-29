@@ -4,7 +4,6 @@ import { backendurl } from './Backendpoint';
 export async function searchUser(search: string, Token: string): Promise<SearchedUser[]> {
   try {
     const response = await fetch(`${backendurl}api/search`, {
-      mode: 'no-cors',
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

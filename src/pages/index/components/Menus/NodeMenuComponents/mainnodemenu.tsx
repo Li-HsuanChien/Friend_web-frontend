@@ -22,17 +22,38 @@ const MenuStyle = styled.div`
   div{
     height: 20%;
     background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 10px;
+  }
+  span{
+    background-color: black;
+    border-radius: 15px;
+    padding: 5px;
+    color: white;
+    display:inline-block;
+    margin-top: 2%;
   }
   p{
     background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  p:first-child{
+    margin-top: 40px;
   }
   a{
     color: black;
   }
+
 `
 
-const MainNodeMenu = () =>{
 
+
+const MainNodeMenu = () =>{
   const [editState, setEditState] = useState<boolean>(false);
 
   if(editState){

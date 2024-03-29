@@ -6,6 +6,7 @@ import { vwToPx, vhToPx } from '../../../lib/px_V_UnitConversion';
 import { closeMenu, addShowedUser } from '../../../actions';
 import { useUser } from '../../../lib/hooks/useUser';
 
+
 const Wrapper = styled.div`
   #workspaceContainer {
     flex: 1;

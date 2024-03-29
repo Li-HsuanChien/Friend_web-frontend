@@ -1,8 +1,11 @@
-import React , { useState } from 'react';
+import React , { useState, useContext } from 'react';
 import styled from 'styled-components';
 import ConnectSearchFeature from './MainMenuFeatures/connectsearch';
 import ConnectPendingFeature from './MainMenuFeatures/connectpending';
 import Logout from './MainMenuFeatures/logout';
+import { IoIosCloseCircleOutline } from 'react-icons/io';
+import { AppContext } from '../../../../AppContext';
+import { closeMenu } from '../../../../actions';
 
 const MenuStyle = styled.div`
   background-color: grey;
@@ -18,14 +21,40 @@ const MenuStyle = styled.div`
   flex-direction: column;
   align-items: center;
 `
-const ItemStyle = styled.div`
-  background-color: white;
+const ItemStyle = styled.button`
   width: 96%;
-  height: 3%;
-  margin-top: 5%;
+  height: 5%;
+  margin-top: 15%;
   align-items: center;
   text-align: center;
-  border-radius: 5%;
+  display: grid;
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 30px; 
+  border: none;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  line-height: 0;
+  font-family: 'Times New Roman', Times, serif;
+
+  &:hover {
+    background-color: #222;
+  }
+`;
+
+const Close = styled(IoIosCloseCircleOutline)`
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.2); 
+  }
+  position: absolute;
+  top: 3%;
+  right: 5%;
 `;
 
 const MainMenu = () => {
@@ -34,6 +63,7 @@ const MainMenu = () => {
   const [logoutState, setLogoutState] = useState(false);
   const [feature2State, setFeature2State] = useState(false);
   const [feature3State, setFeature3State] = useState(false);
+  const { dispatch } = useContext(AppContext);
   // Add more feature states as needed
 
   let componentToRender;
@@ -54,25 +84,26 @@ const MainMenu = () => {
     default:
       componentToRender = (
         <>
-          <ItemStyle>
-            <button onClick={() => setConnectSearchState(!connectSearchState)}>Connect</button>
+          <ItemStyle onClick={() => setConnectSearchState(!connectSearchState)}>
+            Connect
           </ItemStyle>
-          <ItemStyle>
-            <button onClick={() => setConnectionPendingState(!connectionPendingState)}>Pending Connection</button>
+          <ItemStyle onClick={() => setConnectionPendingState(!connectionPendingState)}>
+            Pending Connection
           </ItemStyle>
-          <ItemStyle>
-            <button onClick={() => setLogoutState(!logoutState)}>Logout</button>
+          <ItemStyle onClick={() => setLogoutState(!logoutState)}>
+            Logout
           </ItemStyle>
-          <ItemStyle>
-            <button onClick={() => setFeature2State(!feature2State)}>Feature 2</button>
+          <ItemStyle onClick={() => setFeature2State(!feature2State)}>
+            Feature 2
           </ItemStyle>
-          <ItemStyle>
-            <button onClick={() => setFeature3State(!feature3State)}>Feature 3</button>
+          <ItemStyle onClick={() => setFeature3State(!feature3State)}>
+            Feature 3
           </ItemStyle>
           <ItemStyle>
             Share Website!
             {/* copy clipboard url */}
           </ItemStyle>
+          <Close onClick={()=>dispatch(closeMenu())} />
         </>
       );
   }

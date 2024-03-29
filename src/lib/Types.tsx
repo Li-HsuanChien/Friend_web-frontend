@@ -26,7 +26,7 @@ export interface SuccessUserData {
   instagram_link: string | null;
   facebook_link: string | null;
   snapchat_link: string | null;
-  inviteurl: Url;
+  inviteurl: Url | null;
   created_time: string;
 }
 

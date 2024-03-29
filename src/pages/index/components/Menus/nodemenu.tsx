@@ -24,12 +24,29 @@ const MenuStyle = styled.div`
     height: 20%;
     background-color: white;
   }
+  span{
+    background-color: black;
+    border-radius: 15px;
+    padding: 5px;
+    color: white;
+    display:inline-block;
+    margin-top: 2%;
+  }
   p{
     background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    margin-bottom: 10px;
+    text-align: right;
+  }
+  p:first-child{
+    margin-top: 40px;
   }
   a{
     color: black;
   }
+
 `
 const NodeMenu = () =>{
   const user = useUser();
@@ -38,7 +55,10 @@ const NodeMenu = () =>{
 
   return(
       <>
-        {clickeduser?.username_id===current_user_id
+        {/* {clickeduser?.username_id===current_user_id
+            ? <MainNodeMenu/>
+            : <MenuStyle><DefaultNodeMenu/></MenuStyle>} */}
+        {clickeduser?.username_id!==current_user_id
             ? <MainNodeMenu/>
             : <MenuStyle><DefaultNodeMenu/></MenuStyle>}
       </>

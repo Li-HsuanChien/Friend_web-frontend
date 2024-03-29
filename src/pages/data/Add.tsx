@@ -1,7 +1,6 @@
 /* eslint-disable node/no-unpublished-import */
-import React, {useState, useContext} from 'react';
+import React, { useState } from 'react';
 import {styled} from 'styled-components';
-import { AppContext } from '../../AppContext';
 import { useNavigate } from 'react-router-dom';
 import { UserCreate } from '../../lib/UserDataFunctions';
 import { useToken } from '../../lib/hooks/useToken';
@@ -42,7 +41,7 @@ const AddPageStyle = styled.div`
     background: linear-gradient(to right,
             #dfe1e4,
             #b7b7b8);
-    right: -30px;
+    right: -70px;
     bottom: -80px;
   }
 
@@ -158,7 +157,16 @@ const AddPageStyle = styled.div`
   }
 
   button {
-    margin-top: 50px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px; 
+    border: none;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+    &:hover {
+      background-color: black;
+      color:white;
+    }
     width: 100%;
     background-color: #ffffff;
     color: #080710;
@@ -170,8 +178,33 @@ const AddPageStyle = styled.div`
   }
 }`;
 
+const Toggle = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
 
-// TBD add ping in every page! to check user!
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    color: #555;
+    transition: all 0.3s ease;
+  }
+
+  input[type="checkbox"]:checked + label {
+    background-color: black;
+    color: white;
+    border-color: white;
+  }
+`;
+
 
 const Add = () => {
   const navigate = useNavigate();
@@ -240,17 +273,14 @@ const Add = () => {
             id="Date_of_birth"
             onChange={(e) => setDate(e.target.value)} />
 
-          <div id="Show_horoscope_div">
-            <label htmlFor="Show_horoscope">
-              Show Horoscope?
-              <input
-                type="checkbox"
-                checked={horoscopeState}
-                onChange={() => setHoroscopeState(!horoscopeState)}
-                id="Show_horoscope"
-                name="Show_horoscope"/>
-            </label>
-          </div>
+            <Toggle>
+            <input type="checkbox"
+                   id="horoscope"
+                   name="showhoroscope"
+                   checked={horoscopeState}
+                   onClick={() => setHoroscopeState(!horoscopeState)} />
+            <label htmlFor="horoscope">Showhoroscope?</label>
+            </Toggle>
 
           <button type="submit">Confirm</button>
         </form>

@@ -7,10 +7,15 @@ import { useUser } from '../../../../../lib/hooks/useUser';
 import { useToken } from '../../../../../lib/hooks/useToken';
 import { ConnectionData, SuccessUserData } from '../../../../../lib/Types';
 
-const Close = styled.div`
+const Close = styled(IoIosCloseCircleOutline)`
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.2); /* Example animation */
+  }
   position: absolute;
-  top: 2%;
-  right: 2%;
+  top: 3%;
+  right: 5%;
 `;
 const Query = styled.div`
   position: absolute;
@@ -72,7 +77,7 @@ const ConnectPendingFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChi
 
   return(
     <>
-      <Close><IoIosCloseCircleOutline onClick={()=>setChild(false)} /></Close>
+      <Close onClick={()=>setChild(false)} />
       <Query>
         {userConnectionDatas ? userConnectionDatas.map((item) => (
           <QueryItems key={item.connection_id}>

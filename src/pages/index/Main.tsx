@@ -43,19 +43,19 @@ function Main() {
   const navigate = useNavigate();
   const [jwt] = useToken();
   const user = useUser();
-  useEffect(() => {
-    if(user){
-      getUserData(user.user_id as string, jwt as string)
-        .then(() => {
-          navigate('/');
-        })
-        .catch(() =>{
-          navigate('/add');
-        })
-    } else {
-      navigate('login');
-    }
-  }, [])
+  // useEffect(() => {
+  //   if(user){
+  //     getUserData(user.user_id as string, jwt as string)
+  //       .then(() => {
+  //         navigate('/');
+  //       })
+  //       .catch(() =>{
+  //         navigate('/add');
+  //       })
+  //   } else {
+  //     navigate('login');
+  //   }
+  // }, [])
   return (
     <>
       <StyleDiv>

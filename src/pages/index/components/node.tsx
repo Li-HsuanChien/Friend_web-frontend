@@ -12,6 +12,7 @@ import MainConnection from './MainConnector';
 import {SuccessUserData, ConnectionData, Pos} from '../../../lib/Types'
 import { useToken } from '../../../lib/hooks/useToken';
 import { useUser } from '../../../lib/hooks/useUser';
+import { backendurl } from '../../../lib/Backendpoint';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 
 interface LinePos extends Pos {
@@ -99,11 +100,11 @@ const UserNode: React.FC<{
               setchildName(result.username);
             }
           })
-          .catch((error) => {
-            console.error('Failed to get user data:', error);
-            // Handle error appropriately, e.g., show a toast message
-            navigate('/add');
-          });
+          // .catch((error) => {
+          //   console.error('Failed to get user data:', error);
+          //   // Handle error appropriately, e.g., show a toast message
+          //   navigate('/add');
+          // });
         getActivatedConnection(user_id, jwt as string)
           .then((result) => {
             shownuserstate;
@@ -199,7 +200,7 @@ const UserNode: React.FC<{
             endposdata={{ posx: connection.posx, posy: connection.posy, angle: connection.angle }}
           />)))}
           <img
-            src={`http://127.0.0.1:8000/${data.headshot}`}
+            src={`${backendurl}${data.headshot}`}
             alt={`${data.username_id}`}
             title={`${data.username} ${data.username_id}`}/>
         </NodeStyle>

@@ -3,7 +3,7 @@ import { UserUpdate } from '../../../../../lib/UserDataFunctions';
 import { useToken } from '../../../../../lib/hooks/useToken';
 import { AppContext } from '../../../../../AppContext';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import ComfirmationModal from '../../../../../lib/modal';
+import ConfirmationModal from '../../../../../lib/modal';
 import styled from 'styled-components';
 //TBD add bio
 const EditStyle = styled.div`
@@ -16,109 +16,127 @@ const EditStyle = styled.div`
   right: 2vw;
   top: 2vh;
   padding: 0 2% 0;
-  
 
   form {
-    height: 90%;
+    height: auto; 
     width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
   }
 
   form * {
     font-family: 'Poppins', sans-serif;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-    outline: none;
-    border: none;
   }
 
   form h3 {
     text-align: center;
-  }
-
-  form p {
-    text-align: center;
-  }
-
-  label {
-    display: block;
     color: black;
-    margin-top: 5%
-  }
-
-  input {
-    display: block;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.07);
-  }
-
-  textarea{
-    display: block;
-    background-color: rgba(255, 255, 255, 0.07);
-    resize: none;
-    height: 150px;
-    width: 100%;
-  }
-
- 
-  input[type='checkbox'] {
-    display: inline-block;
-    width: 10%
+    margin-bottom: 1%;
   }
   
-  input[type='date'] {
-    background-color: rgba(255, 255, 255, 0.07);
-    border-radius: 3px;
-    font-size: 14px;
-    font-weight: 300;
+  input[type=url],
+  textarea,
+  input[type='date'],
+  input[type='file'],
+  select {
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 5px;
+    width: 90%;
+    color: black;
+    align-self: end;
+    box-sizing: border-box;
+    resize: none;
+    text-align: end;
   }
 
+  input[type=url],
+  textarea,
+  input[type='date'],
   input[type='file'] {
-    background-color: rgba(255, 255, 255, 0.07);
-    border-radius: 3px;
-    padding: 0px;
-    font-size: 1em;
-    font-weight: 300;
+    margin-bottom: 5px; /* Reduce bottom margin */
   }
 
-  input::file-selector-button {
+  input[type='file']::file-selector-button {
     font-family: 'Poppins', sans-serif;
     border: thin solid grey;
     border-radius: 3px;
   }
 
-  form select{
-    display: block;
+  form select {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.07);
-    border-radius: 3px;
-    padding: 0 10px;
-    margin-top: 8px;
-    font-size: 14px;
-    font-weight: 300;
-  }
-
-  form select option{
-    background-color: rgba(255, 255, 255, 0.07);
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 15px;
+    padding: 5px;
     color: black;
+    align-self: end;
+    box-sizing: border-box; /* Ensure padding is included in width */
   }
 
   ::placeholder {
     color: #e5e5e5;
   }
-
-  button{
-    position: absolute;
-    bottom: 10%;
-    width: 80%;
-    background-color: #ffffff;
-    color: #080710;
-    cursor: pointer;
-  }
 `
-const Close = styled.div`
+const Button = styled.button`
   position: absolute;
-  top: 2%;
-  right: 2%;
+  bottom: 10%; 
+  left: 50%; 
+  transform: translateX(-50%); 
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 10px; 
+  border: none;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  &:hover {
+    background-color: #222;
+  }
+`;
+
+
+const Toggle = styled.div`
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  justify-content: flex-end;
+
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    margin-right: 10px;
+    padding: 8px 15px;
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    color: #555;
+    transition: all 0.3s ease;
+  }
+
+  input[type="checkbox"]:checked + label {
+    background-color: black;
+    color: white;
+    border-color: white;
+  }
+`;
+const Close = styled(IoIosCloseCircleOutline)`
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.2); 
+  }
+  position: absolute;
+  top: 3%;
+  right: 5%;
 `;
 
 const EditNodeMenu: React.FC<{setEditState: Dispatch<boolean>, editState: boolean}> = ({setEditState, editState}) =>{
@@ -134,7 +152,8 @@ const EditNodeMenu: React.FC<{setEditState: Dispatch<boolean>, editState: boolea
   const [instagram, setInstagram] = useState<string>(clickeduser?.instagram_link as string);
   const [image, setImage] = useState<File>();
 
-  const handleSubmit = async() =>{
+  const handleSubmit = async(e: React.FormEvent<HTMLFormElement>) =>{
+    e.preventDefault();
     setEditState(!editState);
     try{
       if(bio || gender || date || horoscopeState || instagram || facebook || snapchat || image){
@@ -158,7 +177,7 @@ const EditNodeMenu: React.FC<{setEditState: Dispatch<boolean>, editState: boolea
   return (
     <>
       <EditStyle>
-        <Close><IoIosCloseCircleOutline onClick={()=>setEditState(false)} /></Close>
+        <Close onClick={()=>setEditState(false)} />
           <form>
             <h3>Edit</h3>
 
@@ -168,7 +187,6 @@ const EditNodeMenu: React.FC<{setEditState: Dispatch<boolean>, editState: boolea
               id="bio"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              maxLength={150}
             />
 
             <label htmlFor='Image'>headshoot</label>
@@ -197,17 +215,14 @@ const EditNodeMenu: React.FC<{setEditState: Dispatch<boolean>, editState: boolea
               value={date}
               onChange={(e) => setDate(e.target.value)} />
 
-            <div id="Show_horoscope_div">
-              <label htmlFor="Show_horoscope">
-                Show Horoscope?
-                <input
-                  type="checkbox"
-                  checked={horoscopeState}
-                  onChange={() => setHoroscopeState(!horoscopeState)}
-                  id="Show_horoscope"
-                  name="Show_horoscope"/>
-              </label>
-            </div>
+            <Toggle>
+            <input type="checkbox"
+                   id="horoscope"
+                   name="showhoroscope"
+                   checked={horoscopeState}
+                   onClick={() => setHoroscopeState(!horoscopeState)} />
+            <label htmlFor="horoscope">Showhoroscope?</label>
+            </Toggle>
 
             <label htmlFor="facebook_link">Facebook Link</label>
             <input
@@ -233,10 +248,10 @@ const EditNodeMenu: React.FC<{setEditState: Dispatch<boolean>, editState: boolea
               value={instagram}
               onChange={(e) => setInstagram(e.target.value)} />
 
-            <button type="button" onClick={() => setConfirmState(!confirmState)} >confirm</button>
+            <Button type="button" onClick={() => setConfirmState(!confirmState)} >confirm</Button>
           </form>
       </EditStyle>
-      {confirmState && <ComfirmationModal func={handleSubmit}setState={setConfirmState} details='Are you sure?'></ComfirmationModal>}
+      {confirmState && <ConfirmationModal func={handleSubmit}setState={setConfirmState} details='Are you sure?'></ConfirmationModal>}
     </>
   )
 }

@@ -7,14 +7,34 @@ import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { useToken } from '../../../../../lib/hooks/useToken';
 import { ChangeEvent } from 'react';
 
-const Close = styled.div`
-  position: absolute;
-  top: 2%;
-  right: 2%;
-`;
 const SearchBar = styled.div`
   position: absolute;
   top: 2%;
+  display: flex;
+  align-items: center;
+  input{
+    width: 70%; /* Adjust width of the input */
+    padding: 8px; /* Adjust padding of the input */
+    border-radius: 5px; /* Adjust border radius of the input */
+    border: 1px solid #ccc; /* Add border to the input */
+  }
+  button{
+    margin-left: 10px; /* Add margin to separate from the input */
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 10px; 
+    border: none;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  button:hover {
+    background-color: #222;
+  }
+  
 `;
 const Query = styled.div`
   position: absolute;
@@ -22,6 +42,30 @@ const Query = styled.div`
   height: 88%;
   width: 95%;
   overflow: auto;
+  button{
+    width: 96%;
+    height: 3%;
+    margin-top: 5%;
+    align-items: center;
+    text-align: center;
+    display: grid;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+    border-radius: 30px; 
+    border: none;
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    line-height: 0;
+    font-family: 'Times New Roman', Times, serif;
+
+    :hover {
+      background-color: #222;
+    }
+  }
 `
 const QueryItems = styled.div`
   width: 100%;
@@ -30,6 +74,16 @@ const QueryItems = styled.div`
   display: flex;
   justify-content: space-between;
 `
+const Close = styled(IoIosCloseCircleOutline)`
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.2); /* Example animation */
+  }
+  position: absolute;
+  top: 3%;
+  right: 5%;
+`;
 
 const ConnectSearchFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChild} ) =>{
   const [jwt] = useToken();
@@ -65,7 +119,7 @@ const ConnectSearchFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChil
           <button type="submit">Go</button>
         </form>
       </SearchBar>
-      <Close><IoIosCloseCircleOutline onClick={()=>setChild(false)} /></Close>
+      <Close onClick={()=>setChild(false)} />
       <Query>
         {searchQuery ? searchQuery.map((item) => (
           <QueryItems key={item.username_id}>
