@@ -200,7 +200,7 @@ const UserNode: React.FC<{
             endposdata={{ posx: connection.posx, posy: connection.posy, angle: connection.angle }}
           />)))}
           <img
-            src={`${backendurl}${data.headshot}`}
+            src={`${data.headshot}`}
             alt={`${data.username_id}`}
             title={`${data.username} ${data.username_id}`}/>
         </NodeStyle>
