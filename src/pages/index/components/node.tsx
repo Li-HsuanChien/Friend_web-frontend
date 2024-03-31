@@ -100,29 +100,24 @@ const UserNode: React.FC<{
               setchildName(result.username);
             }
           })
-          // .catch((error) => {
-          //   console.error('Failed to get user data:', error);
-          //   // Handle error appropriately, e.g., show a toast message
-          //   navigate('/add');
-          // });
-        getActivatedConnection(user_id, jwt as string)
-          .then((result) => {
-            shownuserstate;
-            let connectionsArr = result.filter((connection) => {
-              if(user_id === connection.inviter){
-                return !(shownuserstate?.has(connection.invitee));
-              } else {
-                return !(shownuserstate?.has(connection.inviter));
-              }
-            });
-            connectionsArr = connectionsArr.filter((connection) => connection.activated);
-            setConnections(connectionsArr);
-          })
-          .catch((error) => {
-            console.error('Failed to get user connections:', error);
-            // Handle error appropriately, e.g., show a toast message
+      getActivatedConnection(user_id, jwt as string)
+        .then((result) => {
+          shownuserstate;
+          let connectionsArr = result.filter((connection) => {
+            if(user_id === connection.inviter){
+              return !(shownuserstate?.has(connection.invitee));
+            } else {
+              return !(shownuserstate?.has(connection.inviter));
+            }
           });
-    }, [showConnection])
+          connectionsArr = connectionsArr.filter((connection) => connection.activated);
+          setConnections(connectionsArr);
+        })
+        .catch((error) => {
+          console.error('Failed to get user connections:', error);
+          // Handle error appropriately, e.g., show a toast message
+        });
+    }, [showConnection,])
     useEffect(() =>{
       const connectionsArr = connections?.filter((connection) => {
         if(user_id === connection.inviter){
@@ -140,7 +135,7 @@ const UserNode: React.FC<{
           setchildName(username as string);
         }
       }
-    }, [data, setShowConnection]);
+    }, [data, showConnection]);
     useEffect(() => {
       if (connections && connections.length > 0) {
         const calculatedPos = calcpos(
@@ -153,7 +148,7 @@ const UserNode: React.FC<{
         );
         setEndPosArr(calculatedPos);
       }
-    }, [window.innerHeight, window.innerWidth]);
+    }, [connections, window.innerHeight, window.innerWidth]);
     useEffect(() => {
       if (connections) {
         let combinedData: Combinearr[] = connections.map((item, index) => ({
@@ -163,7 +158,7 @@ const UserNode: React.FC<{
         combinedData = combinedData.filter(connection => !(parent_id === (connection.invitee) || parent_id === (connection.inviter)));
         setCombineArr(combinedData);
       }
-    }, [endposarr]);
+    }, [endposarr, window.innerHeight, window.innerWidth]);
 
     const handleNodeClick = (e: any) => {
       e.stopPropagation()

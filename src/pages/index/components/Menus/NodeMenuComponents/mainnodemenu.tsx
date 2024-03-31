@@ -14,11 +14,13 @@ const MenuStyle = styled.div`
   top: 2vh;
   padding: 0 2% 0;
   img{
-    width: 100%;
+    width: 50%;
     max-height: 30%;
     height: auto;
     object-fit: contain;
-    }
+    display: block;
+    margin: 0 auto;
+  }
   div{
     height: 20%;
     background-color: white;

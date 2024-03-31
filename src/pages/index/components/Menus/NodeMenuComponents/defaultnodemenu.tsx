@@ -10,7 +10,6 @@ import { Gender } from '../../../../../lib/Types';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { closeMenu } from '../../../../../actions';
 import styled from 'styled-components';
-import { backendurl } from '../../../../../lib/Backendpoint';
 
 const Close = styled(IoIosCloseCircleOutline)`
   cursor: pointer;
@@ -31,12 +30,9 @@ const DefaultNodeMenu: React.FC = () =>{
     <>
       <p>@{clickeduser?.username}</p>
           <img
-              width="90%"
-              height="90%"
-              src={`${backendurl}${clickeduser?.headshot as Url}`}
-              alt="Headshot
-              "
-              />
+              src={`${clickeduser?.headshot as Url}`}
+              alt={clickeduser?.username_id}
+          />
           <span>Bio:</span>
           <div>{clickeduser?.bio}</div>
           <span>Gender: </span>

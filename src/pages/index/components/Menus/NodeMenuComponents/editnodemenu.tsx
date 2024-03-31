@@ -220,7 +220,8 @@ const EditNodeMenu: React.FC<{setEditState: Dispatch<boolean>, editState: boolea
                    id="horoscope"
                    name="showhoroscope"
                    checked={horoscopeState}
-                   onClick={() => setHoroscopeState(!horoscopeState)} />
+                   onChange={() => setHoroscopeState(!horoscopeState)}
+                   />
             <label htmlFor="horoscope">Showhoroscope?</label>
             </Toggle>
 
