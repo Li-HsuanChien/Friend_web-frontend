@@ -3,7 +3,7 @@ import { ConnectionUpdate } from '../../../../../lib/ConnectionFunctions';
 import { useToken } from '../../../../../lib/hooks/useToken';
 import { AppContext } from '../../../../../AppContext';
 import { Closeness } from '../../../../../lib/Types';
-import ConfirmationModal from '../../../../../lib/modal';
+import ConfirmationModal from '../../../../../lib/confirmationModal';
 import styled from 'styled-components';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 

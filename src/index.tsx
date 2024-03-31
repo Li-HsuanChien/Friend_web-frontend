@@ -15,6 +15,7 @@ import PasswordResetSetter from './pages/resetpass/passwordResetSetter';
 import EmailConfirmSender from './pages/emailconfirmation/emailConfirmSender';
 import EmailConfirmLanding from './pages/emailconfirmation/emailConfirmationLanding';
 import PasswordResetSender from './pages/resetpass/passwordResetSender';
+import InviteConfirmLanding from './pages/invite/InviteLanding';
 
 
 const root = ReactDOM.createRoot(
@@ -35,6 +36,7 @@ root.render(
         </Route>
         <Route path="/reset-password/:passwordResetCode" element={<PasswordResetSetter />} />
         <Route path="/verify/:verificationToken" element={<EmailConfirmLanding />} />
+        <Route path="/invite/:inviteToken" element={<InviteConfirmLanding />} />
         <Route path="/forgot-password" element={<PasswordResetSender />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />

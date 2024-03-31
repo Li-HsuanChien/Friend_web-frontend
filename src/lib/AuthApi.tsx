@@ -44,7 +44,7 @@ export async function RegisterApi(email: string,
   }).then(data => data.json());
 }
 
-export async function PingServer(Token: string): Promise<void> {
+export async function PingServer(Token: string) {
   try {
     const response = await fetch(`${backendurl}api/currentuser`, {
       method: 'GET',
@@ -56,7 +56,7 @@ export async function PingServer(Token: string): Promise<void> {
     if (!response.ok) {
       throw new Error('Failed to Ping server');
     }
-    return;
+    return response.json();
   } catch (error) {
     console.error('Ping server error:', error);
     throw error;

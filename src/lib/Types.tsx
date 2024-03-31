@@ -26,7 +26,6 @@ export interface SuccessUserData {
   instagram_link: string | null;
   facebook_link: string | null;
   snapchat_link: string | null;
-  inviteurl: Url | null;
   created_time: string;
 }
 
@@ -55,4 +54,12 @@ export interface SearchedUser{
 
 export interface Message{
   message: string;
+}
+
+export type InviteToken = string
+export interface InviteUrlCreateResponse{
+  'id': string,
+  'created_at': string,
+  'user': string,
+  'user_uuid': string
 }

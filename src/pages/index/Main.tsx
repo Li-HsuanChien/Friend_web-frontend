@@ -1,5 +1,5 @@
 /* eslint-disable node/no-unpublished-import */
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import WorkspaceComponent from './components/workspace';
 import styled from 'styled-components';
 import { AppContext } from '../../AppContext';
@@ -7,10 +7,7 @@ import MenuIcon from './components/Menus/menuIcon';
 import MainMenu from './components/Menus/mainmenu';
 import NodeMenu from './components/Menus/nodemenu';
 import ConnectionMenu from './components/Menus/connectionmenu';
-import { getUserData } from '../../lib/UserDataFunctions';
-import { useToken } from '../../lib/hooks/useToken';
-import { useUser } from '../../lib/hooks/useUser';
-import {useNavigate} from 'react-router-dom'
+
 
 const Topright = styled.div`
   position: fixed;
@@ -40,22 +37,7 @@ const StyleDiv = styled.div`
 
 function Main() {
   const { menustate, clickedconnection, clickeduser } = useContext(AppContext);
-  const navigate = useNavigate();
-  const [jwt] = useToken();
-  const user = useUser();
-  // useEffect(() => {
-  //   if(user){
-  //     getUserData(user.user_id as string, jwt as string)
-  //       .then(() => {
-  //         navigate('/');
-  //       })
-  //       .catch(() =>{
-  //         navigate('/add');
-  //       })
-  //   } else {
-  //     navigate('login');
-  //   }
-  // }, [])
+
   return (
     <>
       <StyleDiv>

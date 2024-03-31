@@ -6,7 +6,7 @@ import { useToken } from '../../../../../lib/hooks/useToken';
 import { useRefreshToken } from '../../../../../lib/hooks/useRefreshToken';
 import { logout } from '../../../../../lib/AuthApi';
 import { useNavigate } from 'react-router-dom';
-import ConfirmationModal from '../../../../../lib/modal';
+import ConfirmationModal from '../../../../../lib/confirmationModal';
 
 
 const Button = styled.button`

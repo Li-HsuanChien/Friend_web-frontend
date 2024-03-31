@@ -4,7 +4,6 @@ import { styled } from 'styled-components';
 import { AppContext } from '../../../AppContext';
 import { clickedUser, sendWorkSpacePos, addShowedUser, removeShowedUser } from '../../../actions';
 import Connection from './connector';
-import { useNavigate } from 'react-router-dom';
 import { getUserData } from '../../../lib/UserDataFunctions';
 import { getActivatedConnection } from '../../../lib/ConnectionFunctions';
 import { pxToVH, pxToVW } from '../../../lib/px_V_UnitConversion';
@@ -12,7 +11,6 @@ import MainConnection from './MainConnector';
 import {SuccessUserData, ConnectionData, Pos} from '../../../lib/Types'
 import { useToken } from '../../../lib/hooks/useToken';
 import { useUser } from '../../../lib/hooks/useUser';
-import { backendurl } from '../../../lib/Backendpoint';
 // eslint-disable-next-line node/no-unsupported-features/node-builtins
 
 interface LinePos extends Pos {
@@ -79,7 +77,6 @@ const UserNode: React.FC<{
     const user = useUser();
     const current_user_id = user ? user.user_id: null;
     const { dispatch, shownuserstate } = useContext(AppContext);
-    const navigate = useNavigate();
     const [data, setData] = useState<SuccessUserData | null>(null);
     const [connections, setConnections] = useState<ConnectionData[]>();
     const [endposarr, setEndPosArr] = useState<LinePos[]>([]);

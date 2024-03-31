@@ -5,6 +5,8 @@ import UserNode from './node';
 import { vwToPx, vhToPx } from '../../../lib/px_V_UnitConversion';
 import { closeMenu, addShowedUser } from '../../../actions';
 import { useUser } from '../../../lib/hooks/useUser';
+import { useToken } from '../../../lib/hooks/useToken';
+import { ConnectWithInviteToken } from '../../../lib/inviteFunctions';
 
 
 const Wrapper = styled.div`
@@ -39,6 +41,7 @@ interface WorkspaceConf {
 }
 const Workspace: React.FC = () => {
   const user = useUser();
+  const [token, ] = useToken();
   const current_user_id = user ? user.user_id: null;
   const { dispatch, workspacepos } = useContext(AppContext);
   const [workspaceConf, setWorkspaceConf] = useState<WorkspaceConf>({
@@ -67,6 +70,18 @@ const Workspace: React.FC = () => {
   useEffect(() => {
     dispatch(addShowedUser(current_user_id as string));
   },[])
+  useEffect(() =>{
+    const inviteToken = localStorage.getItem('invitetoken');
+    if(inviteToken){
+      ConnectWithInviteToken(inviteToken, token as string)
+      .then(() =>{
+        localStorage.removeItem('invitetoken');
+      })
+      .catch((err) =>{
+        console.log(err);
+      })
+    }
+  }, [])
 
   useEffect(()=>{
     const movementX = vwToPx(50 - (workspacepos?.posx as number))

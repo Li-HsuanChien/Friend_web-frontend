@@ -3,7 +3,7 @@ import { UserUpdate } from '../../../../../lib/UserDataFunctions';
 import { useToken } from '../../../../../lib/hooks/useToken';
 import { AppContext } from '../../../../../AppContext';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
-import ConfirmationModal from '../../../../../lib/modal';
+import ConfirmationModal from '../../../../../lib/confirmationModal';
 import styled from 'styled-components';
 //TBD add bio
 const EditStyle = styled.div`

@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserCreate } from '../../lib/UserDataFunctions';
 import { useToken } from '../../lib/hooks/useToken';
 import { useRefreshToken } from '../../lib/hooks/useRefreshToken';
+import { ConnectWithInviteToken } from '../../lib/inviteFunctions';
 
 const AddPageStyle = styled.div`
   position: fixed;
@@ -222,8 +223,9 @@ const Add = () => {
           const token = await UserCreate(gender, date, horoscopeState, jwt, image);
           setRefreshToken(token.refresh);
           setToken(token.access);
-          navigate('/');
         }
+        navigate('/');
+
     } catch(error)  {
       console.error(error)
       return;
