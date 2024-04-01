@@ -1,6 +1,6 @@
 import React, { Dispatch } from 'react';
 import styled, { keyframes } from 'styled-components';
-
+import { IoIosCloseCircleOutline } from 'react-icons/io';
 const fadeIn = keyframes`
   from {
     opacity: 0;
@@ -51,6 +51,16 @@ const Button = styled.button`
     background-color: #333;
   }
 `;
+const Close = styled(IoIosCloseCircleOutline)`
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.2); 
+  }
+  position: absolute;
+  top: 3%;
+  right: 5%;
+`;
 
 const ButtonGroup = styled.div`
   display: flex;
@@ -67,6 +77,7 @@ const ConfirmationModal: React.FC<{
   return (
     <ModalStyle>
       <div>
+        <Close onClick={()=>setState(false)} />
         <p style={{textAlign: 'center'}}>{details}</p>
         <ButtonGroup>
           <Button onClick={() => func}>Yes</Button>
