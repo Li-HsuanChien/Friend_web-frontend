@@ -1,5 +1,5 @@
 import { SuccessUserData } from './Types'
-import { backendurl } from './Backendpoint';
+import { backendurl } from './domainList';
 
 
 // Define the getUserData function

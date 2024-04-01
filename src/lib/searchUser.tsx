@@ -1,5 +1,5 @@
 import { SearchedUser } from './Types'
-import { backendurl } from './Backendpoint';
+import { backendurl } from './domainList';
 
 export async function searchUser(search: string, Token: string): Promise<SearchedUser[]> {
   try {

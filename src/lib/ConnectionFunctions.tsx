@@ -1,5 +1,5 @@
 import {ConnectionData, Message, Closeness} from './Types'
-import { backendurl } from './Backendpoint';
+import { backendurl } from './domainList';
 export async function getActivatedConnection(user_id: string, Token: string): Promise<ConnectionData[]> {
   try {
     const response = await fetch(`${backendurl}api/connections/activated`, {

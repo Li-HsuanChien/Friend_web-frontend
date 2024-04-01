@@ -1,4 +1,4 @@
-import { backendurl } from './Backendpoint';
+import { backendurl } from './domainList';
 
 export async function LoginApi(email_username: string, password: string) {
   try {

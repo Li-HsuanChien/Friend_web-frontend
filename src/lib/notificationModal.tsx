@@ -38,22 +38,6 @@ const ModalStyle = styled.div`
   }
 `;
 
-const Button = styled.button`
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  max-width: 100px; /* Added max-width to limit button width */
-
-  &:hover {
-    background-color: #333;
-  }
-`;
-
-
-
 const Close = styled(IoIosCloseCircleOutline)`
   cursor: pointer;
   transition: transform 0.3s ease;

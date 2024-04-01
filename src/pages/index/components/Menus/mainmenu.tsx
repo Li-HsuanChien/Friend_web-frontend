@@ -6,6 +6,10 @@ import Logout from './MainMenuFeatures/logout';
 import { IoIosCloseCircleOutline } from 'react-icons/io';
 import { AppContext } from '../../../../AppContext';
 import { closeMenu } from '../../../../actions';
+import ClipBoardModal from '../../../../lib/clipboardModal';
+import { CreateInviteToken } from '../../../../lib/inviteFunctions';
+import { useToken } from '../../../../lib/hooks/useToken';
+import { fronturl } from '../../../../lib/domainList';
 
 const MenuStyle = styled.div`
   background-color: grey;
@@ -58,13 +62,25 @@ const Close = styled(IoIosCloseCircleOutline)`
 `;
 
 const MainMenu = () => {
+  const [token, ] = useToken();
   const [connectSearchState, setConnectSearchState] = useState(false);
   const [connectionPendingState, setConnectionPendingState] = useState(false);
   const [logoutState, setLogoutState] = useState(false);
-  const [feature2State, setFeature2State] = useState(false);
-  const [feature3State, setFeature3State] = useState(false);
+  const [inviteLink, setInviteLink] = useState('');
+  const [inviteLinkState, setInviteLinkState] = useState(false);
+  const [shareLinkState, setShareLinkState] = useState(false);
   const { dispatch } = useContext(AppContext);
-  // Add more feature states as needed
+
+  const createInviteLink = () => {
+    CreateInviteToken(token as string)
+    .then((result) => {
+      setInviteLink(`${fronturl}invite/${result.id}`);
+      setInviteLinkState(!inviteLinkState);
+    })
+    .catch((err) =>{
+      console.log(err);
+    })
+  };
 
   let componentToRender;
 
@@ -77,10 +93,13 @@ const MainMenu = () => {
       break;
     case logoutState:
       componentToRender = <Logout setChild={setLogoutState}/>;
-    break;
-    // case feature2State:
-    //   componentToRender = <Feature2 />;
-    //   break;
+      break;
+    case inviteLinkState:
+      componentToRender = <ClipBoardModal setState={setInviteLinkState} details={inviteLink}/>;
+      break;
+    case shareLinkState:
+      componentToRender = <ClipBoardModal setState={setShareLinkState} details={fronturl}/>;
+      break;
     default:
       componentToRender = (
         <>
@@ -93,15 +112,14 @@ const MainMenu = () => {
           <ItemStyle onClick={() => setLogoutState(!logoutState)}>
             Logout
           </ItemStyle>
-          <ItemStyle onClick={() => setFeature2State(!feature2State)}>
-            Feature 2
+          <ItemStyle onClick={createInviteLink}>
+            Invite friends!
           </ItemStyle>
-          <ItemStyle onClick={() => setFeature3State(!feature3State)}>
-            Feature 3
+          <ItemStyle onClick={() => setShareLinkState(!shareLinkState)}>
+            Share Website!
           </ItemStyle>
           <ItemStyle>
-            Share Website!
-            {/* copy clipboard url */}
+            Feature
           </ItemStyle>
           <Close onClick={()=>dispatch(closeMenu())} />
         </>

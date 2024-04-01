@@ -1,4 +1,4 @@
-import { backendurl } from './Backendpoint';
+import { backendurl } from './domainList';
 
 export async function VerifyEmailWithToken(JWTToken: string, token_id: string) {
   try {

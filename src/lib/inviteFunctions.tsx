@@ -1,4 +1,4 @@
-import { backendurl } from './Backendpoint';
+import { backendurl } from './domainList';
 import { InviteUrlCreateResponse, Message, ConnectionData } from './Types';
 
 
