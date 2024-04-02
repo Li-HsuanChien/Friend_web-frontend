@@ -13,13 +13,13 @@ const SearchBar = styled.div`
   display: flex;
   align-items: center;
   input{
-    width: 70%; /* Adjust width of the input */
-    padding: 8px; /* Adjust padding of the input */
-    border-radius: 5px; /* Adjust border radius of the input */
-    border: 1px solid #ccc; /* Add border to the input */
+    width: 70%; 
+    padding: 8px; 
+    border-radius: 5px; 
+    border: 1px solid #ccc; 
   }
   button{
-    margin-left: 10px; /* Add margin to separate from the input */
+    margin-left: 10px;
     padding: 10px 20px;
     background-color: #000;
     color: #fff;
@@ -41,7 +41,8 @@ const Query = styled.div`
   top: 10%;
   height: 88%;
   width: 95%;
-  overflow: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
   button{
     width: 96%;
     height: 3%;
@@ -73,12 +74,13 @@ const QueryItems = styled.div`
   background-color: white;
   display: flex;
   justify-content: space-between;
+  transition: opacity 0.5s ease;
 `
 const Close = styled(IoIosCloseCircleOutline)`
   cursor: pointer;
   transition: transform 0.3s ease;
   &:hover {
-    transform: scale(1.2); /* Example animation */
+    transform: scale(1.2); 
   }
   position: absolute;
   top: 3%;
@@ -124,7 +126,7 @@ const ConnectSearchFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChil
         {searchQuery ? searchQuery.map((item) => (
           <QueryItems key={item.username_id}>
             <img
-              src={`http://127.0.0.1:8000/${item.headshot}`}
+              src={`${item.headshot}`}
               alt={item.username}
               style={{ height: '100%' }}
             />

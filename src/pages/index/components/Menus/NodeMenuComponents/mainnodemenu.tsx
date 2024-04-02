@@ -15,14 +15,14 @@ const MenuStyle = styled.div`
   padding: 0 2% 0;
   img{
     width: 50%;
-    max-height: 30%;
+    max-height: 20%;
     height: auto;
     object-fit: contain;
     display: block;
     margin: 0 auto;
   }
   div{
-    height: 20%;
+    height: 15%;
     background-color: white;
     border: 2px solid black;
     border-radius: 15px;
@@ -45,7 +45,7 @@ const MenuStyle = styled.div`
     text-align: right;
   }
   p:first-child{
-    margin-top: 40px;
+    margin-top: 30px;
   }
   a{
     color: black;

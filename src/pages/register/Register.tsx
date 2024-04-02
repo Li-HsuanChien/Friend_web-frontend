@@ -150,7 +150,7 @@ const Register = () => {
                                            password as string,
                                            password2 as string);
         if (response.username) {
-          setRegistrationState(`Welcome! ${response.username}, redirecting you to verification page!`);
+          setRegistrationState(`Welcome! ${response.username}, redirecting you to login page!`);
           setTimeout(() => {
             navigate('/login');
           }, 2000);

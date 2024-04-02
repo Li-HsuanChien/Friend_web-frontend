@@ -22,7 +22,22 @@ const Query = styled.div`
   top: 10%;
   height: 88%;
   width: 95%;
-  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
+  &::-webkit-scrollbar {
+    width: 8px; 
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  &::-webkit-scrollbar-thumb {
+    background: none; 
+    border: 2px solid #fff; 
+    border-radius: 10px; 
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: none; 
+  }
 `
 const QueryItems = styled.div`
   width: 100%;
@@ -30,6 +45,10 @@ const QueryItems = styled.div`
   background-color: white;
   display: flex;
   justify-content: space-between;
+  transition: transform 0.3s ease;
+  &:hover {
+    transform: scale(1.05);
+  }
 `
 
 interface ConnectionUserItem extends SuccessUserData{
@@ -65,14 +84,11 @@ const ConnectPendingFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChi
   const  acceptConnectRequest = (connection_id: string)=>{
     ConnectionUpdate(connection_id, jwt as string)
     .then(result=> console.log(result));
-    //User Visual
-    //delete target
   }
 
   const  rejectConnectRequest = (connection_id: string)=>{
     ConnectionDelete(connection_id, jwt as string)
     .then(result=> console.log(result));
-    //User Visual
   }
 
   return(
@@ -82,7 +98,7 @@ const ConnectPendingFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChi
         {userConnectionDatas ? userConnectionDatas.map((item) => (
           <QueryItems key={item.connection_id}>
             <img
-              src={`http://127.0.0.1:8000/${item.headshot}`}
+              src={`${item.headshot}`}
               alt={item.username}
               style={{ height: '100%' }}
             />
