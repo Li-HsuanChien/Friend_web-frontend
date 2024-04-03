@@ -43,39 +43,62 @@ const Query = styled.div`
   width: 95%;
   overflow-y: auto;
   overflow-x: hidden;
-  button{
-    width: 96%;
-    height: 3%;
-    margin-top: 5%;
-    align-items: center;
-    text-align: center;
-    display: grid;
-    padding: 10px 20px;
-    background-color: #000;
-    color: #fff;
-    border-radius: 30px; 
-    border: none;
-    text-decoration: none;
-    font-size: 10px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    line-height: 0;
-    font-family: 'Times New Roman', Times, serif;
-
-    :hover {
-      background-color: #222;
-    }
+  &::-webkit-scrollbar {
+    width: 8px; 
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent; 
+  }
+  &::-webkit-scrollbar-thumb {
+    background: none; 
+    border: 2px solid #fff; 
+    border-radius: 10px; 
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: none; 
   }
 `
+
 const QueryItems = styled.div`
   width: 100%;
   height: 10%;
   background-color: white;
+  border: 2px solid black;
+  border-radius: 15px;
+  box-sizing: border-box;
   display: flex;
-  justify-content: space-between;
-  transition: opacity 0.5s ease;
-`
+  align-items: center; 
+  justify-content: space-between; 
+  padding: 0 10px; 
+  img {
+    height: 100%;
+  }
+
+  div:last-child {
+    display: flex;
+    align-items: end;
+    height: 100%;
+  }
+`;
+
+const Button = styled.button`
+  width: 30%;
+  padding: 5px 10px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 10px; 
+  border: none;
+  height: 100%;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  transform-origin: center;
+  &:hover {
+    transform: scale(1.1); 
+  }
+`;
 const Close = styled(IoIosCloseCircleOutline)`
   cursor: pointer;
   transition: transform 0.3s ease;
@@ -131,7 +154,7 @@ const ConnectSearchFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChil
               style={{ height: '100%' }}
             />
             <div>{item.username}</div>
-            <button onClick={() => submitConnectRequest(item.username_id)}>connect</button>
+            <Button onClick={() => submitConnectRequest(item.username_id)}>connect</Button>
           </QueryItems>
         )) : <p>No items</p>}
       </Query>
