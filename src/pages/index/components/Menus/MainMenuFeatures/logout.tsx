@@ -49,7 +49,8 @@ const Logout: React.FC<{ setChild: Dispatch<boolean> }> = ({ setChild }) => {
     window.localStorage.removeItem('JWTToken');
     window.localStorage.removeItem('JWTRefreshToken');
     logout(jwt as string, refreshjwt)
-      .then(() => navigate('/login'));
+    .then(() => navigate('/login'));
+    console.log('log')
   };
 
   return (
