@@ -48,7 +48,7 @@ export type Action =
 
 export interface SearchedUser{
   username: string,
-  headshot: Url,
+  headshot: Url | string,
   username_id: string
 }
 

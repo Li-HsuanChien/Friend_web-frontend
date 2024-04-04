@@ -1,5 +1,5 @@
 import React , { useState, Dispatch } from 'react';
-import styled from 'styled-components';
+import styled,  { keyframes, css } from 'styled-components';
 import { searchUser } from '../../../../../lib/searchUser'
 import { ConnectionCreate } from '../../../../../lib/ConnectionFunctions';
 import { SearchedUser } from '../../../../../lib/Types';
@@ -58,8 +58,24 @@ const Query = styled.div`
     background: none; 
   }
 `
+const fadeOutUp = keyframes`
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+`;
 
-const QueryItems = styled.div`
+const fadeUpAnimation = css`
+  animation: ${fadeOutUp} 1s ease forwards;
+`;
+
+type Action = 'connect' | 'default'
+
+const QueryItems = styled.div<{action: Action}>`
   width: 100%;
   height: 10%;
   background-color: white;
@@ -79,6 +95,7 @@ const QueryItems = styled.div`
     align-items: end;
     height: 100%;
   }
+  ${({ action }) => action === 'connect' ? fadeUpAnimation : ''}
 `;
 
 const Button = styled.button`
@@ -110,6 +127,32 @@ const Close = styled(IoIosCloseCircleOutline)`
   right: 5%;
 `;
 
+const QueryItem: React.FC<{
+  userData: SearchedUser;
+  ConnectRequest: (invitee_id: string) => void;
+}> = ({ userData, ConnectRequest }) => {
+  const [action, setAction] = useState<Action>('default');
+
+  return (
+    <QueryItems action={action}>
+      <img
+              src={`${userData.headshot}`}
+              alt={userData.username}
+              style={{ height: '100%' }}
+            />
+      <div>{userData.username}</div>
+      <Button onClick={() => {
+        setAction('connect');
+        setTimeout(() => {
+          ConnectRequest(userData.username_id);
+        }, 1000);
+      }}>connect</Button>
+    </QueryItems>
+  );
+};
+
+
+
 const ConnectSearchFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChild} ) =>{
   const [jwt] = useToken();
   const [searchQuery, setSearchQuery] = useState<SearchedUser[]>([]);
@@ -121,17 +164,16 @@ const ConnectSearchFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChil
     .then((result) => setSearchQuery(result));
   }
 
-  const  submitConnectRequest = (invitee_id: string)=>{
+  const submitConnectRequest = (invitee_id: string)=>{
+    setSearchQuery(searchQuery.filter(item => item.username_id !== invitee_id));
     ConnectionCreate(jwt as string, invitee_id)
     .then(result=> console.log(result));
-    //User Visual
   }
 
   return(
     <>
       <SearchBar>
         <form onSubmit={handleSubmit} role="search">
-          {/* <label htmlFor="search">Search for stuff</label> */}
           <input
             id="search"
             type="search"
@@ -147,15 +189,10 @@ const ConnectSearchFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChil
       <Close onClick={()=>setChild(false)} />
       <Query>
         {searchQuery ? searchQuery.map((item) => (
-          <QueryItems key={item.username_id}>
-            <img
-              src={`${item.headshot}`}
-              alt={item.username}
-              style={{ height: '100%' }}
-            />
-            <div>{item.username}</div>
-            <Button onClick={() => submitConnectRequest(item.username_id)}>connect</Button>
-          </QueryItems>
+          <QueryItem
+          key={item.username_id}
+          userData={item}
+          ConnectRequest={submitConnectRequest}/>
         )) : <p>No items</p>}
       </Query>
     </>
