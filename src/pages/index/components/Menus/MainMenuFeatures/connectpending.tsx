@@ -25,7 +25,7 @@ const Close = styled(IoIosCloseCircleOutline)`
 `;
 const Query = styled.div`
   position: absolute;
-  top: 10%;
+  top: 7%;
   height: 88%;
   width: 95%;
   overflow-y: auto;
@@ -56,7 +56,6 @@ const fadeOutLeft = keyframes`
   }
 `;
 
-// Fade out animation to the right
 const fadeOutRight = keyframes`
   from {
     opacity: 1;
@@ -99,9 +98,9 @@ const QueryItems = styled.div<{ action: Action }>`
 
   ${({ action }) => {
     switch (action) {
-      case 'accept':
-        return fadeRightAnimation;
       case 'reject':
+        return fadeRightAnimation;
+      case 'accept':
         return fadeLeftAnimation;
       default:
         return '';
@@ -128,14 +127,41 @@ const Button = styled.button`
   }
 `;
 
+const QueryItem: React.FC<{
+  userData: ConnectionUserItem;
+  acceptConnectRequest: (connection_id: string) => void;
+  rejectConnectRequest: (connection_id: string) => void;
+}> = ({ userData, acceptConnectRequest, rejectConnectRequest }) => {
+  const [action, setAction] = useState<Action>('default');
+
+  return (
+    <QueryItems action={action}>
+      <img src={userData.headshot as string} alt={userData.username} />
+      <div>{userData.username}</div>
+      <div>
+        <Button onClick={() =>{
+          setAction('accept');
+          setTimeout(() => {
+            acceptConnectRequest(userData.connection_id);
+          }, 1000);
+          }}>accept</Button>
+        <Button onClick={() => {
+          setAction('reject');
+          setTimeout(() => {
+            rejectConnectRequest(userData.connection_id);
+          }, 1000);
+          }}>reject</Button>
+      </div>
+    </QueryItems>
+  );
+};
+
 const ConnectPendingFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChild} ) =>{
   const [jwt] = useToken();
   const user = useUser();
   const current_user_id = user ? user.user_id: null;
   const [userConnectionDatas, setUserConnectionDatas] = useState<ConnectionUserItem[]>([]);
   const [Connections, setConnections] = useState<ConnectionData[]>([]);
-  const [clickedConnection, setClickedConnections] = useState<string>('');
-  const [action, setAction] = useState<Action>('default');
 
   useEffect(() =>{
     getPendingConnection(current_user_id as string, jwt as string)
@@ -156,13 +182,8 @@ const ConnectPendingFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChi
     fetchUserData();
   }, [Connections]);
 
-  useEffect(() =>{
-    setUserConnectionDatas(Connections => Connections.filter(item => item.connection_id !== clickedConnection));
-  }, [action])
-
   const  acceptConnectRequest = (connection_id: string)=>{
-    setClickedConnections(connection_id)
-    setAction('accept')
+    setUserConnectionDatas(userConnectionDatas.filter(item => item.connection_id !== connection_id));
     ConnectionUpdate(connection_id, jwt as string)
     .then(()=> {
       alert('accepted!')
@@ -171,8 +192,7 @@ const ConnectPendingFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChi
   }
 
   const  rejectConnectRequest = (connection_id: string)=>{
-    setClickedConnections(connection_id)
-    setAction('reject');
+    setUserConnectionDatas(userConnectionDatas.filter(item => item.connection_id !== connection_id));
     ConnectionDelete(connection_id, jwt as string)
     .then(()=> {
       alert('rejected!')
@@ -180,27 +200,25 @@ const ConnectPendingFeature: React.FC<{setChild:Dispatch<boolean>}>  = ( {setChi
     .catch((err) => console.error(err))
   }
 
-  return(
+  return (
     <>
-      <Close onClick={()=>setChild(false)} />
+      <Close onClick={() => setChild(false)} />
       <Query>
-        {userConnectionDatas ? userConnectionDatas.map((item) => (
-          <QueryItems key={item.connection_id} action={action}>
-            <img
-              src={`${item.headshot}`}
-              alt={item.username}
+        {userConnectionDatas ? (
+          userConnectionDatas.map((item) => (
+            <QueryItem
+              key={item.connection_id}
+              userData={item}
+              acceptConnectRequest={acceptConnectRequest}
+              rejectConnectRequest={rejectConnectRequest}
             />
-            <div>{item.username}</div>
-            <div>
-              <Button onClick={() => acceptConnectRequest(item.connection_id)}>accept</Button>
-              <Button onClick={() => rejectConnectRequest(item.connection_id)}>reject</Button>
-            </div>
-          </QueryItems>
-        )) : <p>No items</p>}
+          ))
+        ) : (
+          <p>You have no pending connections!</p>
+        )}
       </Query>
     </>
-  )
-}
-
+  );
+};
 
 export default ConnectPendingFeature;

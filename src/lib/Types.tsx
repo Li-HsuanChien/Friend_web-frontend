@@ -19,7 +19,7 @@ export interface SuccessUserData {
   username: string;
   username_id: string;
   bio: string | null;
-  headshot: Url | null;
+  headshot: Url | string |null;
   gender: Gender;
   date_of_birth: string;
   show_horoscope: boolean;
