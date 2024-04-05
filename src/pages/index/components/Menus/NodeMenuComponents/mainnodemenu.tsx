@@ -4,6 +4,7 @@ import EditNodeMenu from './editnodemenu';
 import styled from 'styled-components';
 
 
+
 const MenuStyle = styled.div`
   background-color: grey;
   position: absolute;
@@ -52,6 +53,21 @@ const MenuStyle = styled.div`
   }
 
 `
+const Button = styled.button`
+  padding: 10px 20px;
+  background-color: #000;
+  color: #fff;
+  border-radius: 10px; 
+  border: none;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  &:hover {
+    background-color: #222;
+  }
+`;
 
 
 
@@ -64,7 +80,7 @@ const MainNodeMenu = () =>{
     return(
       <MenuStyle>
         <DefaultNodeMenu/>
-        <button onClick={()=>{setEditState(!editState);}}>edit</button>
+        <Button onClick={()=>{setEditState(!editState);}}>edit</Button>
       </MenuStyle>
     )
   }

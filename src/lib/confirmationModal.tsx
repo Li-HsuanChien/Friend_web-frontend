@@ -80,7 +80,9 @@ const ConfirmationModal: React.FC<{
         <Close onClick={()=>setState(false)} />
         <p style={{textAlign: 'center'}}>{details}</p>
         <ButtonGroup>
-          <Button onClick={(e:any) => func(e)}>Yes</Button>
+          <Button onClick={(e:any) => {
+            func(e);
+            setState(false);}}>Yes</Button>
           <Button onClick={() => setState(false)}>No</Button>
         </ButtonGroup>
       </div>
