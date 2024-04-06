@@ -122,7 +122,7 @@ export async function ConnectionUpdate(connection_id: string,
     const body: ConnectionBody = {connection_id: connection_id, activated: 'True'};
     if(closeness) body.closeness = closeness;
     if(nickname) body.nickname = nickname;
-    const response = await fetch(`${backendurl}connections/self `, {
+    const response = await fetch(`${backendurl}/api/connections/self `, {
       credentials: 'include',
       method: 'PUT',
       headers: {
