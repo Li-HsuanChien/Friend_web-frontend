@@ -34,7 +34,7 @@ const NodeStyle = styled.div<{ posdata: Pos, nodesize: number }>`
     ${props => props.posdata ? `top: ${props.posdata.posy - (pxToVH(props.nodesize) / 2)}vh` : '0'};
     ${props => props.posdata ? `left: ${props.posdata.posx - (pxToVW(props.nodesize) / 2)}vw` : '0'};
     transition: border-width 0.1s ease-in-out;
-    border: 1px solid white; 
+    border: 1px solid white;
   }
   img:hover {
     border: 3px solid white;
@@ -157,8 +157,8 @@ const UserNode: React.FC<{
         const calculatedPos = calcpos(
           posData.angle,
           connections.length,
-          180,
-          180,
+          220,
+          220,
           posData.posx,
           posData.posy,
         );

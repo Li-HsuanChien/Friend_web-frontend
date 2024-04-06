@@ -87,11 +87,11 @@ const MainConnection: React.FC<Props> = (props) => {
   useEffect(() => {
     const nodesize = props.nodesize;
     if(closeness === 'friend'){
-      setChildNodeSize(nodesize - 15);
+      setChildNodeSize(nodesize - 50);
     } else if(closeness === 'closefriend'){
-      setChildNodeSize(nodesize - 10);
+      setChildNodeSize(nodesize - 40);
     } else{
-      setChildNodeSize(nodesize - 5);
+      setChildNodeSize(nodesize - 30);
     }
     const startPosx = props.startposdata.posx;
     const startPosy = props.startposdata.posy;
@@ -119,7 +119,7 @@ const MainConnection: React.FC<Props> = (props) => {
         y2 : 100
       })
     }
-  }, [window.innerHeight, window.innerWidth, props])
+  }, [])
   const handleLineCLick = (e: any) =>{
     e.stopPropagation();
   }

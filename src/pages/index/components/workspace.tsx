@@ -120,7 +120,7 @@ const Workspace: React.FC = () => {
             user_id = {current_user_id as string}
             posData={{posx: 50, posy:50, angle:((5 * Math.PI)/4)}}
             connectionState = {true}
-            nodesize={80}
+            nodesize={120}
             ></UserNode>
         </main>
         <button onClick={returnPos}>Back</button>
