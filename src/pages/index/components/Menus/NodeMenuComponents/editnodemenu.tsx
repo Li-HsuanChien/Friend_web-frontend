@@ -73,7 +73,7 @@ const EditStyle = styled.div`
     padding: 5px;
     color: black;
     align-self: end;
-    box-sizing: border-box; /* Ensure padding is included in width */
+    box-sizing: border-box; 
   }
 
   ::placeholder {
