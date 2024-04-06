@@ -31,13 +31,14 @@ const NodeStyle = styled.div<{ posdata: Pos, nodesize: number }>`
     ${props => props.nodesize ? `height: ${props.nodesize}px` : '80px'};
     background-color: white;
     border-radius: 50%;
-    border: none; /* add this line to remove the border by default */
     ${props => props.posdata ? `top: ${props.posdata.posy - (pxToVH(props.nodesize) / 2)}vh` : '0'};
     ${props => props.posdata ? `left: ${props.posdata.posx - (pxToVW(props.nodesize) / 2)}vw` : '0'};
-    transition: border-color 0.3s; 
+    transition: border-width 0.1s ease-in-out;
+    border: 1px solid white; 
   }
   img:hover {
-    border: 2px solid white; 
+    border: 3px solid white;
+    cursor: pointer; 
   }
 `;
 
@@ -163,7 +164,7 @@ const UserNode: React.FC<{
         );
         setEndPosArr(calculatedPos);
       }
-    }, [connections,forceRerender]);
+    }, [connections, forceRerender]);
 
     useEffect(() => {
       if (connections) {

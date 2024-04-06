@@ -11,14 +11,18 @@ const LineBox = styled.svg<{ fullposdata?: fullPosdata }>`
   ${({ fullposdata }) => fullposdata ? `height: ${fullposdata.height}vh;` : '0'};
   z-index: -1;
 
-  line{ 
+  line { 
     stroke: white;
     stroke-width: 3px;
-    
+    transition: stroke-width 0.1s ease-in;
   }
+  
   line:hover {
+    transition: stroke-width 0.1s ease-out;
+    cursor: pointer;
     stroke: white;
     stroke-width: 6px; 
+    
   }
 `
 
@@ -123,7 +127,6 @@ const MainConnection: React.FC<Props> = (props) => {
       <LineBox fullposdata={fullPosdata} height={fullPosdata.height} width={fullPosdata.width} id={`connection ${id}`}>
         <g onMouseOver={(e) => e.stopPropagation()}>
           <line
-            className="hover-effect"
             x1={`${lineData.x1}%`}
             y1={`${lineData.y1}%`}
             x2={`${lineData.x2}%`}

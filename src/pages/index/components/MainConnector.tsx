@@ -13,14 +13,18 @@ const LineBox = styled.svg<{ fullposdata?: fullPosdata }>`
   ${props => props.fullposdata ? `height: ${props.fullposdata.height}vh` : '0'};
   z-index: -1;
 
-  line{ 
+  line { 
     stroke: white;
     stroke-width: 3px;
-    
+    transition: stroke-width 0.1s ease-in;
   }
+  
   line:hover {
+    transition: stroke-width 0.1s ease-out;
+    cursor: pointer;
     stroke: white;
     stroke-width: 6px; 
+    
   }
 `
 interface LinePos extends Pos{
