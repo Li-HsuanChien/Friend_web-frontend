@@ -118,9 +118,9 @@ const MainMenu = () => {
           <ItemStyle onClick={() => setShareLinkState(!shareLinkState)}>
             Share Website!
           </ItemStyle>
-          <ItemStyle>
+          {/* <ItemStyle>
             Feature
-          </ItemStyle>
+          </ItemStyle> */}
           <Close onClick={()=>dispatch(closeMenu())} />
         </>
       );

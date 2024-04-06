@@ -25,6 +25,9 @@ import { useUser } from '../../../../lib/hooks/useUser';
     div{
       height: 15%;
       background-color: white;
+      border: 2px solid black;
+      border-radius: 15px;
+      padding: 10px;
     }
     span{
       background-color: black;

@@ -16,6 +16,7 @@ import { useUser } from '../../../lib/hooks/useUser';
 interface LinePos extends Pos {
   angle: number,
 }
+
 const NodeStyle = styled.div<{ posdata: Pos, nodesize: number }>`
   position: fixed;
   ${props => props.nodesize ? `width: ${props.nodesize}px` : '80px'};
@@ -33,10 +34,10 @@ const NodeStyle = styled.div<{ posdata: Pos, nodesize: number }>`
     border: none; /* add this line to remove the border by default */
     ${props => props.posdata ? `top: ${props.posdata.posy - (pxToVH(props.nodesize) / 2)}vh` : '0'};
     ${props => props.posdata ? `left: ${props.posdata.posx - (pxToVW(props.nodesize) / 2)}vw` : '0'};
-    transition: border-color 0.3s; /* add transition for smooth effect */
+    transition: border-color 0.3s; 
   }
   img:hover {
-    border: 2px solid white; /* add border and change its properties on hover */
+    border: 2px solid white; 
   }
 `;
 
@@ -82,14 +83,14 @@ const UserNode: React.FC<{
     const [endposarr, setEndPosArr] = useState<LinePos[]>([]);
     const [combineArr, setCombineArr] = useState<Combinearr[]>([]);
     const [showConnection, setShowConnection] = useState<boolean>(connectionState);
-    useEffect(() => {
-      dispatch(addShowedUser(user_id));
-      return () => {
-        dispatch(removeShowedUser(user_id));
-      };
-    }, []);
+    const [forceRerender, setForceRerender] = useState({});
 
-    useEffect(() =>{
+
+    useEffect(() => {
+      const handleResize = () => {
+        setForceRerender({});
+      };
+
       getUserData(user_id, jwt as string)
           .then((result) => {
             setData(result);
@@ -97,7 +98,20 @@ const UserNode: React.FC<{
               setchildName(result.username);
             }
           })
-      getActivatedConnection(user_id, jwt as string)
+
+      window.addEventListener('resize', handleResize);
+
+      dispatch(addShowedUser(user_id));
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+        dispatch(removeShowedUser(user_id));
+      };
+    }, []);
+
+    useEffect(() =>{
+      if(showConnection){
+        getActivatedConnection(user_id, jwt as string)
         .then((result) => {
           shownuserstate;
           let connectionsArr = result.filter((connection) => {
@@ -114,7 +128,9 @@ const UserNode: React.FC<{
           console.error('Failed to get user connections:', error);
           // Handle error appropriately, e.g., show a toast message
         });
+      }
     }, [showConnection,])
+
     useEffect(() =>{
       const connectionsArr = connections?.filter((connection) => {
         if(user_id === connection.inviter){
@@ -125,6 +141,7 @@ const UserNode: React.FC<{
       });
       setConnections(connectionsArr);
     }, [shownuserstate])
+
     useEffect(() => {
       if (setchildName) {
         if (data?.username) {
@@ -133,6 +150,7 @@ const UserNode: React.FC<{
         }
       }
     }, [data, showConnection]);
+
     useEffect(() => {
       if (connections && connections.length > 0) {
         const calculatedPos = calcpos(
@@ -145,7 +163,8 @@ const UserNode: React.FC<{
         );
         setEndPosArr(calculatedPos);
       }
-    }, [connections, window.innerHeight, window.innerWidth]);
+    }, [connections,forceRerender]);
+
     useEffect(() => {
       if (connections) {
         let combinedData: Combinearr[] = connections.map((item, index) => ({
@@ -155,7 +174,7 @@ const UserNode: React.FC<{
         combinedData = combinedData.filter(connection => !(parent_id === (connection.invitee) || parent_id === (connection.inviter)));
         setCombineArr(combinedData);
       }
-    }, [endposarr, window.innerHeight, window.innerWidth]);
+    }, [endposarr]);
 
     const handleNodeClick = (e: any) => {
       e.stopPropagation()
