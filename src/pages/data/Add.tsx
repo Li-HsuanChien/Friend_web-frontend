@@ -209,9 +209,9 @@ const Toggle = styled.div`
 
 const Add = () => {
   const navigate = useNavigate();
-  const [horoscopeState, setHoroscopeState] = useState<boolean>(false);
-  const [date, setDate] = useState<string>('');
-  const [gender, setGender] = useState<string>('');
+  const [horoscopeState, setHoroscopeState] = useState<boolean>();
+  const [date, setDate] = useState<string>();
+  const [gender, setGender] = useState<string>();
   const [image, setImage] = useState<File>();
   const [jwt, setToken] = useToken();
   const [,setRefreshToken] = useRefreshToken();
@@ -220,7 +220,7 @@ const Add = () => {
     e.preventDefault();
     try{
         if(gender && date && horoscopeState && jwt){
-          const token = await UserCreate(gender, date, horoscopeState, jwt, image);
+          const token = await UserCreate(gender as string , date as string, horoscopeState as boolean, jwt, image);
           setRefreshToken(token.refresh);
           setToken(token.access);
         }
@@ -284,7 +284,9 @@ const Add = () => {
             <label htmlFor="horoscope">Showhoroscope?</label>
             </Toggle>
 
-          <button type="submit">Confirm</button>
+          <button
+          disabled={!gender || setHoroscopeState === undefined || !date}
+          type="submit">Confirm</button>
         </form>
       </AddPageStyle>
     </>
