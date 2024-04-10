@@ -131,7 +131,7 @@ const InviteConfirmSuccess = () => {
           <h3>Success!!</h3>
           <h3>You have been invited!</h3>
           <h3>Sign up and connect with your friend!!</h3>
-          <button onClick={() => nav('/')}>Let's get started!</button>
+          <button onClick={() => nav('/register')}>Let's get started!</button>
           {message && <p>{message}</p>}
         </main>
       </ReportStyle>
