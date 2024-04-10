@@ -55,7 +55,7 @@ function calcpos(
   for (let i = 0; i < itemcount; i++) {
 
     const unit = i % 2 === 0 ? evenunit : oddunit;
-    const Angle = ((parent_angle - Math.PI)) + split * i;
+    const Angle = (parent_angle) + split * (i);
     const YDiffPx = unit * Math.sin(Angle);
     const XDiffPx = unit * Math.cos(Angle);
     res.push({
@@ -130,7 +130,7 @@ const UserNode: React.FC<{
           // Handle error appropriately, e.g., show a toast message
         });
       }
-    }, [showConnection,])
+    }, [showConnection])
 
     useEffect(() =>{
       const connectionsArr = connections?.filter((connection) => {

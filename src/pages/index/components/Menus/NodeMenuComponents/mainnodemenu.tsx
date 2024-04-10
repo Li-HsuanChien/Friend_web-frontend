@@ -4,7 +4,6 @@ import EditNodeMenu from './editnodemenu';
 import styled from 'styled-components';
 
 
-
 const MenuStyle = styled.div`
   background-color: grey;
   position: absolute;
@@ -34,8 +33,7 @@ const MenuStyle = styled.div`
     border-radius: 15px;
     padding: 5px;
     color: white;
-    display:inline-block;
-    margin-top: 2%;
+    margin-top: 3%;
   }
   p{
     background-color: white;

@@ -1,14 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import styled from 'styled-components';
 import UserNode from './node';
-import { Pos, ConnectionData } from '../../../lib/Types';
+import { AppContext } from '../../../AppContext';
+import { clickedConnection } from '../../../actions';
+import { ConnectionData, Pos } from '../../../lib/Types';
 
 const LineBox = styled.svg<{ fullposdata?: fullPosdata }>`
   position: fixed;
-  ${({ fullposdata }) => fullposdata ? `top: ${fullposdata.top}vh;` : '0'};
-  ${({ fullposdata }) => fullposdata ? `left: ${fullposdata.left}vh;` : '0'};
-  ${({ fullposdata }) => fullposdata ? `width: ${fullposdata.width}vh;` : '0'};
-  ${({ fullposdata }) => fullposdata ? `height: ${fullposdata.height}vh;` : '0'};
+  ${props => props.fullposdata ? `top: ${props.fullposdata.top}vh` : '0'};
+  ${props => props.fullposdata ? `left: ${props.fullposdata.left}vw` : '0'};
+  ${props => props.fullposdata ? `width: ${props.fullposdata.width}vw` : '0'};
+  ${props => props.fullposdata ? `height: ${props.fullposdata.height}vh` : '0'};
   z-index: -1;
 
   line { 
@@ -25,11 +27,9 @@ const LineBox = styled.svg<{ fullposdata?: fullPosdata }>`
     
   }
 `
-
 interface LinePos extends Pos{
   angle: number,
 }
-
 interface fullPosdata{
   top: number,
   left: number,
@@ -68,8 +68,10 @@ const MainConnection: React.FC<Props> = (props) => {
   const parent_username = props.parent.username;
   const inviterIsParent = inviter === parent_id;
   const child_id = inviterIsParent? invitee: inviter;
+  const { dispatch } = useContext(AppContext)
   const [childNodeSize, setChildNodeSize] = useState<number>(80);
   const [childName, setchildName] = useState<string>('');
+  // known start and finish
   const [lineData, setLineData] = useState<LineData>({
     x1: 0,
     x2: 0,
@@ -82,16 +84,14 @@ const MainConnection: React.FC<Props> = (props) => {
     height: 0,
     width: 0,
   })
-
   useEffect(() => {
     const nodesize = props.nodesize;
-    console.log(nodesize);
     if(closeness === 'friend'){
-      setChildNodeSize(nodesize - 60);
+      setChildNodeSize(Math.round(nodesize*0.9));
     } else if(closeness === 'closefriend'){
-      setChildNodeSize(nodesize - 40);
+      setChildNodeSize(Math.round(nodesize*0.75));
     } else{
-      setChildNodeSize(nodesize - 30);
+      setChildNodeSize(Math.round(nodesize*0.6));
     }
     const startPosx = props.startposdata.posx;
     const startPosy = props.startposdata.posy;
@@ -118,23 +118,33 @@ const MainConnection: React.FC<Props> = (props) => {
         y2 : 100
       })
     }
-  }, [props.nodesize, props.startposdata, props.endposdata, closeness])
-
-  const handleLineCLick = (e:any) =>{
+  }, [])
+  const handleLineCLick = (e: any) =>{
     e.stopPropagation();
+  }
+  const handledbLineCLick = (e:any) =>{
+    e.stopPropagation();
+    dispatch(clickedConnection(props.data));
   }
 
 
   return (
     <>
-      <LineBox fullposdata={fullPosdata} height={fullPosdata.height} width={fullPosdata.width} id={`connection ${id}`}>
+      <LineBox
+        fullposdata={fullPosdata}
+        height={fullPosdata.height}
+        width={fullPosdata.width}
+        id={`connection ${id}`}
+        onClick={handleLineCLick}>
         <g onMouseOver={(e) => e.stopPropagation()}>
           <line
+            className="hover-effect"
             x1={`${lineData.x1}%`}
             y1={`${lineData.y1}%`}
             x2={`${lineData.x2}%`}
             y2={`${lineData.y2}%`}
             onClick={handleLineCLick}
+            onDoubleClick={handledbLineCLick}
           />
           <title>{`Connection ID: ${id}\nDate Established: ${date_established}\nCloseness: ${closeness}\n`}
                   {nicknameparenttochild && `${childName}'s Nick Name to ${parent_username}is ${nicknameparenttochild}\n`}

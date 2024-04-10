@@ -15,7 +15,6 @@ const MenuStyle = styled.div`
   top: 2vh;
   padding: 0 2% 0;
   span{
-    height: 20%;
     background-color: black;
     border-radius: 15px;
     padding: 5px;
@@ -43,15 +42,9 @@ const ConnectionMenu= () =>{
 
   return(
     <>
-      {/* <MenuStyle>
         {clickedconnection?.inviter===current_user_id || clickedconnection?.invitee===current_user_id
           ? <MainConnectionMenu/>
-          : <DefaultConnectionMenu/>}
-      </MenuStyle> */}
-        {clickedconnection?.inviter!==current_user_id || clickedconnection?.invitee!==current_user_id
-          ? <MainConnectionMenu/>
           : <MenuStyle><DefaultConnectionMenu/></MenuStyle>}
-
     </>
   )
 }

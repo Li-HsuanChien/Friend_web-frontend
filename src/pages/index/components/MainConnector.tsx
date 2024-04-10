@@ -87,17 +87,16 @@ const MainConnection: React.FC<Props> = (props) => {
   useEffect(() => {
     const nodesize = props.nodesize;
     if(closeness === 'friend'){
-      setChildNodeSize(nodesize - 50);
+      setChildNodeSize(Math.round(nodesize*0.9));
     } else if(closeness === 'closefriend'){
-      setChildNodeSize(nodesize - 40);
+      setChildNodeSize(Math.round(nodesize*0.75));
     } else{
-      setChildNodeSize(nodesize - 30);
+      setChildNodeSize(Math.round(nodesize*0.6));
     }
     const startPosx = props.startposdata.posx;
     const startPosy = props.startposdata.posy;
     const endPosx = props.endposdata.posx;
     const endPosy = props.endposdata.posy;
-    //console.log(`line ${id} sx ${startPosx} sy${startPosy} ex${endPosx} ey${endPosy} `)
     SetFullPosData({
       top: Math.min(startPosy, endPosy),
       left: Math.min(startPosx, endPosx),
