@@ -16,7 +16,7 @@ import EmailConfirmSender from './pages/emailconfirmation/emailConfirmSender';
 import EmailConfirmLanding from './pages/emailconfirmation/emailConfirmationLanding';
 import PasswordResetSender from './pages/resetpass/passwordResetSender';
 import InviteConfirmLanding from './pages/invite/InviteLanding';
-
+import IntroductionPage from './pages/intro';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -40,6 +40,7 @@ root.render(
         <Route path="/forgot-password" element={<PasswordResetSender />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/introduction" element={<IntroductionPage />} />
       </Routes>
     </HashRouter>
   </AppProvider>
