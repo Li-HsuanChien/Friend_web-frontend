@@ -5,6 +5,7 @@ import Login from './pages/login/Login';
 import Register from './pages/register/Register';
 import Add from './pages/data/Add';
 import reportWebVitals from './reportWebVitals';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { AppProvider } from './AppContext';
 // eslint-disable-next-line node/no-unpublished-import
 import {HashRouter, Routes, Route} from 'react-router-dom';

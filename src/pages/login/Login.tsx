@@ -44,7 +44,7 @@ const LoginStyle = styled.div`
   }
 
   form {
-    height: 400px;
+    height: 500px;
     width: 400px;
     background-color: rgba(255, 255, 255, 0.13);
     position: absolute;
