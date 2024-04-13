@@ -11,7 +11,6 @@
 
 * [![React][React.js]][React-url]
 * [![Typescript][Typescript.ts]][Typescript-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
