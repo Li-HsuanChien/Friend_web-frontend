@@ -37,7 +37,7 @@ const OuterContainer = styled.div`
   margin: 0 auto;
   width: 80vw;
   flex-direction: column;
-  overflow-y: auto; 
+  
 `;
 
 const MidContainer = styled.div`
@@ -73,10 +73,10 @@ const TextContainer = styled.div`
   }
 
   p {
-    text-align: center;
+    text-align: left;
     margin-top: 15px;
     margin-bottom: 10px;
-    font-size: 13px;
+    font-size: 20px;
   }
 
 `;
@@ -103,7 +103,8 @@ const GridContainer = styled.div`
   grid-gap: 20px;
 `;
 
-const GifItem = styled.img`
+const GifItem = styled.div`
+  position: relative;
   width: 50%;
   height: auto;
   &:nth-child(2) {
@@ -112,45 +113,58 @@ const GifItem = styled.img`
     max-height: 100%;
     width: 50%;
   }
+
+  img {
+    width: 100%;
+    height: auto;
+  }
+
+  .caption {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 5px;
+    font-size: 12px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 `;
 
-const EvenImage = styled.img`
-  display: block;
-  width: auto;
-  height: auto;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-`;
+interface ImgSet {
+  url: string;
+  description: string;
+}
 
-const GifGrid: React.FC<{ imgs: string[] }> = ({ imgs }) => (
+const GifGrid: React.FC<{ imgs: ImgSet[] }> = ({ imgs }) => (
   <GridContainer>
     {imgs.map((img, index) => (
-      <GifItem key={index} src={img} alt={'gif'} />
+      <GifItem key={index}>
+        <img src={img.url} alt={'gif'} />
+        <div className="caption">{img.description}</div>
+      </GifItem>
     ))}
   </GridContainer>
 );
 
 
-const OddSection: React.FC<{text: string, images: string[], title: string}> = ({ text, images, title }) => (
+
+const OddSection: React.FC<{text: string, images: ImgSet[], }> = ({ text, images,  }) => (
 
   <MidContainer>
       <TextContainer><p>{text}</p></TextContainer>
       <ImageContainer>
-        <h1>{title}</h1>
         <GifGrid imgs={images}/>
       </ImageContainer>
   </MidContainer>
 
 );
 
-const EvenSection: React.FC<{text: string, images: string[], title: string}> = ({ text, images, title }) => (
+const EvenSection: React.FC<{text: string, images: ImgSet[]}> = ({ text, images,  }) => (
   <MidContainer>
     <ImageContainer>
-      <h1>{title}</h1>
-      {images.map((image, index) => (
-        <EvenImage key={index} src={image} alt={'no img'} />
-      ))}
+      <GifGrid imgs={images}/>
       </ImageContainer>
     <TextContainer><p>{text}</p></TextContainer>
   </MidContainer>
@@ -161,24 +175,38 @@ const IntroductionPage = () => (
     <TitleDiv>Friend-web Introduction - Hang with your friends on the web</TitleDiv>
     <OuterContainer>
       <OddSection
-        text="Sample text"
-        images={[process.env.PUBLIC_URL + '/friend-web-showcase/add.gif',
-                 process.env.PUBLIC_URL + '/friend-web-showcase/index.gif',
-                 process.env.PUBLIC_URL + '/friend-web-showcase/index.gif']}
-        title="Connect with your friends and theirs!" />
+        text="Experience the joy of connecting with your friends and theirs! The main page allows you to see your friends' activities on the web. You can easily accept friend requests and explore their profiles to know them better."
+        images={[
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/indexshowcase.gif', description: 'Main page: See your friends on the web!' },
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/acceptinvite.gif', description: 'Accept Invite: Respond to friend requests' },
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/showdetails.gif', description: 'Show Details: Explore friend profiles' }
+        ]}
+      />
       <EvenSection
-        text="Text for even section"
-        images={[process.env.PUBLIC_URL + '/friend-web-showcase/add.gif', process.env.PUBLIC_URL + '/friend-web-showcase/add.gif']}
-        title='Login and Verification securely!' />
+        text="Securely login and verify your account to ensure the safety of your data. With our login and verification process, you can trust that your information is protected. Sign up, verify your email, and enjoy peace of mind with Friend-web."
+        images={[
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/signup.gif', description: 'Sign Up: Create your account' },
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/loginverify.gif', description: 'Login Verification: Secure access to your account' },
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/emailverify.gif', description: 'Email Verification: Confirm your email address' }
+        ]}
+      />
       <OddSection
-        text="Text for odd section"
-        images={[process.env.PUBLIC_URL + '/friend-web-showcase/add.gif']}
-        title="Invite your friends"/>
+        text="Invite your friends to join you on Friend-web! Easily send invitations and connect with more people. Grow your network and enjoy having your friends with you on the web."
+        images={[
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/signup.gif', description: 'Sign Up: Create your account' },
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/loginverify.gif', description: 'Login Verification: Secure access to your account' },
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/emailverify.gif', description: 'Email Verification: Confirm your email address' }
+        ]}
+      />
       <EvenSection
-        text="Text for even section"
-        images={[process.env.PUBLIC_URL + '/friend-web-showcase/add.gif']}
-        title="Express yourself to possible new friends!"/>
-      {/* Add more sections as needed */}
+        text="Express yourself and make new friends with Friend-web's expressive features. Add connections, edit your profile, and manage your connections effortlessly!"
+        images={[
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/add.gif', description: 'Add: Add connections or content' },
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/editconnections.gif', description: 'Edit Connections: Manage your connections' },
+          { url: process.env.PUBLIC_URL + '/friend-web-showcase/editnode.gif', description: 'Edit Node: Modify your profile' }
+        ]}
+      />
+      {/* sections */}
     </OuterContainer>
   </DummyRoot>
 );
