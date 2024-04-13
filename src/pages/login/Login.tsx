@@ -210,6 +210,7 @@ const Login = () => {
             style={{marginTop: loginState ? '5px' : '20px'}}
           >Log In</button>
           <SignLink to="/register">Sign up!</SignLink>
+          <SignLink to="/introduction">What is this website?</SignLink>
         </form>
       </LoginStyle>
     </>
