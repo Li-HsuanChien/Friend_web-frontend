@@ -46,6 +46,7 @@ Join us and unlock the power of your social network to make meaningful connectio
 
 **3. Improve UI/UX**
   - Improve the user interface and overall user experience to make the application more intuitive, engaging, and visually appealing. This includes refining design elements, optimizing navigation flows, and incorporating user feedback to streamline interactions and improve usability.
+  - Add multiple and self declared gender identity to ensure inclusiveness
 
 **4. Implement Other Features**
   - Adding additional functionality to enhance the application's capabilities and utility. This could include features such as advanced search options, personalized recommendations, social integration, or any other enhancements that align with the app's goals and user needs.
@@ -55,6 +56,9 @@ Join us and unlock the power of your social network to make meaningful connectio
 
 **6. OAuth 2.0 for SSO capabilities**
   - Integrate OAuth 2.0 for single sign-on (SSO) capabilities, allowing users to securely authenticate across multiple applications or services using their existing credentials. This increases user convenience and security by eliminating the need for separate credentials and simplifying the authentication process.
+
+
+
 
 
 
