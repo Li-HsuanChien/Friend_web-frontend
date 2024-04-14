@@ -15,8 +15,8 @@ const LoginStyle = styled.div`
   background-color: #080710;
 
   .background {
-    width: 430px;
-    height: 520px;
+    height: 50vh;
+    width: 28vw;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
@@ -24,27 +24,27 @@ const LoginStyle = styled.div`
   }
 
   .background .shape {
-    height: 200px;
-    width: 200px;
+    height: 25vmin;
+    width: 25vmin;
     position: absolute;
     border-radius: 50%;
   }
 
   .shape:first-child {
     background: linear-gradient(#dfe1e4, #b7b7b8);
-    left: -80px;
-    top: -80px;
+    left: -6vw;
+    top: -12vh;
   }
 
   .shape:last-child {
     background: linear-gradient(to right, #dfe1e4, #b7b7b8);
-    right: -80px;
-    bottom: -80px;
+    right: -6vw;
+    bottom: -12vh;
   }
 
   form {
-    height: 400px;
-    width: 400px;
+    height: 50vh;
+    width: 28vw;
     background-color: rgba(255, 255, 255, 0.13);
     position: absolute;
     transform: translate(-50%, -50%);
@@ -54,7 +54,7 @@ const LoginStyle = styled.div`
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-    padding: 50px 35px;
+    padding: 4vh 2vw;
   }
 
   form * {
@@ -82,7 +82,6 @@ const LoginStyle = styled.div`
 
   label {
     display: block;
-    margin-top: 80px;
     font-size: 16px;
     font-weight: 500;
   }
@@ -90,7 +89,7 @@ const LoginStyle = styled.div`
   input {
     display: block;
     height: 50px;
-    width: 95%;
+    width: 100%;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
     padding: 0 10px;
@@ -127,7 +126,7 @@ const LoginStyle = styled.div`
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
-    margin-top: 100px;
+    margin-top: 8vh;
   }
   main {
     height: 400px;

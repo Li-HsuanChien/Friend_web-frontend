@@ -16,8 +16,8 @@ const LoginStyle = styled.div`
   background-color: #080710;
 
   .background {
-    width: 430px;
-    height: 520px;
+    height: 60vh;
+    width: 28vw;
     position: absolute;
     transform: translate(-50%, -50%);
     left: 50%;
@@ -25,27 +25,27 @@ const LoginStyle = styled.div`
   }
 
   .background .shape {
-    height: 200px;
-    width: 200px;
+    height: 25vmin;
+    width: 25vmin;
     position: absolute;
     border-radius: 50%;
   }
 
   .shape:first-child {
     background: linear-gradient(#dfe1e4, #b7b7b8);
-    left: -80px;
-    top: -80px;
+    left: -6vw;
+    top: -12vh;
   }
 
   .shape:last-child {
     background: linear-gradient(to right, #dfe1e4, #b7b7b8);
-    right: -80px;
-    bottom: -80px;
+    right: -6vw;
+    bottom: -12vh;
   }
 
   form {
-    height: 500px;
-    width: 400px;
+    height: 60vh;
+    width: 28vw;
     background-color: rgba(255, 255, 255, 0.13);
     position: absolute;
     transform: translate(-50%, -50%);
@@ -55,7 +55,7 @@ const LoginStyle = styled.div`
     backdrop-filter: blur(10px);
     border: 2px solid rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 40px rgba(8, 7, 16, 0.6);
-    padding: 50px 35px;
+    padding: 4vh 2vw;
   }
 
   form * {
@@ -67,7 +67,7 @@ const LoginStyle = styled.div`
   }
 
   form h3 {
-    font-size: 32px;
+    font-size: 5vmin;
     font-weight: 500;
     line-height: 42px;
     text-align: center;
@@ -75,26 +75,25 @@ const LoginStyle = styled.div`
 
   form p {
     text-align: center;
-    margin-top: 15px;
-    margin-bottom: 10px;
-    font-size: 13px;
+    margin-top: 1vh;
+    font-size: 2vmin;
   }
 
   label {
     display: block;
-    margin-top: 30px;
-    font-size: 16px;
+    margin-top: 2vh;
+    font-size: 2vmin;
     font-weight: 500;
   }
 
   input {
     display: block;
-    height: 50px;
+    height: 7vh;
     width: 100%;
     background-color: rgba(255, 255, 255, 0.07);
     border-radius: 3px;
-    margin-top: 8px;
-    font-size: 14px;
+    margin-top: 0.5vh;
+    font-size: 2vmin;
     font-weight: 300;
   }
   
@@ -116,8 +115,8 @@ const LoginStyle = styled.div`
     width: 100%;
     background-color: #ffffff;
     color: #080710;
-    padding: 15px 0;
-    font-size: 18px;
+    padding: 2vh 0;
+    font-size: 2.5vmin;
     font-weight: 600;
     border-radius: 5px;
     cursor: pointer;
@@ -126,10 +125,12 @@ const LoginStyle = styled.div`
 const ForgotLink = styled(Link)`
   display: block;
   text-align: right;
+  font-size: 2vmin;
 `
 const SignLink = styled(Link)`
   display: block;
   text-align: left;
+  font-size: 2vmin;
 `
 
 interface successMessage {
@@ -207,7 +208,7 @@ const Login = () => {
           {loginState && <p>{loginState}</p>}
           <button
             type="submit"
-            style={{marginTop: loginState ? '5px' : '20px'}}
+            style={{marginTop: loginState ? '1vh' : '3vh'}}
           >Log In</button>
           <SignLink to="/register">Sign up!</SignLink>
           <SignLink to="/introduction">What is this website?</SignLink>
