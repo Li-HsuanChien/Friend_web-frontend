@@ -33,7 +33,7 @@ Join us and unlock the power of your social network to make meaningful connectio
 **[Website link](https://li-hsuanchien.github.io/Friend_web-frontend/)**
 
 
-**[Website Introduction](https://li-hsuanchien.github.io/Friend_web-frontend/)**
+**[[Website Introduction]](https://li-hsuanchien.github.io/Friend_web-frontend/#/introduction)**
 
 
 # Upcoming updates
