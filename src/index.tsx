@@ -26,7 +26,7 @@ root.render(
   <AppProvider>
     <HashRouter>
       <Routes>
-        <Route element={<PrivateRoutes/>}>
+        {/* <Route element={<PrivateRoutes/>}>
           <Route element={<VerifiedRoutes/>}>
             <Route element={<DataRoutes/>}>
               <Route path ="/" element={<Main />} />
@@ -40,8 +40,8 @@ root.render(
         <Route path="/invite/:inviteToken" element={<InviteConfirmLanding />} />
         <Route path="/forgot-password" element={<PasswordResetSender />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/introduction" element={<IntroductionPage />} />
+        <Route path="/register" element={<Register />} /> */}
+        <Route path="/" element={<IntroductionPage />} />
       </Routes>
     </HashRouter>
   </AppProvider>

@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 
-
 const DummyRoot = styled.div`
   position: fixed;
   top: 0;
@@ -11,14 +10,14 @@ const DummyRoot = styled.div`
   background-color: #080710;
   overflow: auto;
   padding: 0 0 100px 0;
+`;
 
-`
 const TitleDiv = styled.div`
   text-align: center;
   padding: 20px;
   color: #ffffff;
-  font-size: 36px; 
-  font-weight: bold; 
+  font-size: 36px;
+  font-weight: bold;
   border: 2px solid rgba(255, 255, 255, 0.1);
   border-radius: 30px;
   position: sticky;
@@ -32,12 +31,32 @@ const TitleDiv = styled.div`
   justify-content: center;
 `;
 
+const WarningBox = styled.div`
+  background-color: #ff4444; /* Red background */
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 20px;
+  font-weight: bold;
+  border: 2px solid #cc0000; /* Darker red border */
+  border-radius: 10px;
+  margin: 20px auto;
+  width: 80%;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+  img {
+    display: block;
+    margin: 15px auto 0 auto; /* Center the image and add space above */
+    max-width: 100px; /* Adjust the size of the image */
+    height: auto;
+  }
+`;
+
 const OuterContainer = styled.div`
   display: flex;
   margin: 0 auto;
   width: 80vw;
   flex-direction: column;
-  
 `;
 
 const MidContainer = styled.div`
@@ -49,8 +68,6 @@ const MidContainer = styled.div`
   align-items: center;
   justify-content: space-between;
 `;
-
-
 
 const TextContainer = styled.div`
   position: relative;
@@ -78,7 +95,6 @@ const TextContainer = styled.div`
     margin-bottom: 10px;
     font-size: 20px;
   }
-
 `;
 
 const ImageContainer = styled.div`
@@ -89,7 +105,7 @@ const ImageContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
 
-  h1{
+  h1 {
     text-align: center;
     color: white;
     top: 0%;
@@ -148,31 +164,38 @@ const GifGrid: React.FC<{ imgs: ImgSet[] }> = ({ imgs }) => (
   </GridContainer>
 );
 
-
-
-const OddSection: React.FC<{text: string, images: ImgSet[], }> = ({ text, images,  }) => (
-
+const OddSection: React.FC<{ text: string; images: ImgSet[] }> = ({ text, images }) => (
   <MidContainer>
-      <TextContainer><p>{text}</p></TextContainer>
-      <ImageContainer>
-        <GifGrid imgs={images}/>
-      </ImageContainer>
+    <TextContainer>
+      <p>{text}</p>
+    </TextContainer>
+    <ImageContainer>
+      <GifGrid imgs={images} />
+    </ImageContainer>
   </MidContainer>
-
 );
 
-const EvenSection: React.FC<{text: string, images: ImgSet[]}> = ({ text, images,  }) => (
+const EvenSection: React.FC<{ text: string; images: ImgSet[] }> = ({ text, images }) => (
   <MidContainer>
     <ImageContainer>
-      <GifGrid imgs={images}/>
-      </ImageContainer>
-    <TextContainer><p>{text}</p></TextContainer>
+      <GifGrid imgs={images} />
+    </ImageContainer>
+    <TextContainer>
+      <p>{text}</p>
+    </TextContainer>
   </MidContainer>
 );
 
 const IntroductionPage = () => (
   <DummyRoot>
     <TitleDiv>Friend-web Introduction - Hang with your friends on the web</TitleDiv>
+    <WarningBox>
+      ⚠️ The backend for Friend-web has been discontinued. We are working on updating and migrating the backend to a new infrastructure. Stay tuned for future updates!
+      <img
+        src={process.env.PUBLIC_URL + '/under-construction-pikachu.gif'}
+        alt="Under Construction Pikachu"
+      />
+    </WarningBox>
     <OuterContainer>
       <OddSection
         text="Experience the joy of connecting with your friends and theirs! The main page allows you to see your friends' activities on the web. You can easily accept friend requests and explore their profiles to know them better."
@@ -206,7 +229,6 @@ const IntroductionPage = () => (
           { url: process.env.PUBLIC_URL + '/friend-web-showcase/editnode.gif', description: 'Edit Node: Modify your profile' }
         ]}
       />
-      {/* sections */}
     </OuterContainer>
   </DummyRoot>
 );
